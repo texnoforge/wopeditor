@@ -1,0 +1,11 @@
+site_name: Words of Power Editor
+theme: readthedocs
+nav:
+  - README.md
+  - intro.md
+  - install.md
+  - core_symbols.md
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: True
