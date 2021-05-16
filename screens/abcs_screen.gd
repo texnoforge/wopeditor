@@ -6,6 +6,11 @@ const AbcButton = preload("res://ui/abc_button.tscn")
 var abcs = null
 
 
+func _ready():
+	var but = get_node("HBoxLayout/VBoxSide/ButtonTestServer")
+	but.connect("pressed", WoPEditor, "test_server")
+
+
 func set_context(new_abcs):
 	abcs = new_abcs
 

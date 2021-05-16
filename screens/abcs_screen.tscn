@@ -32,23 +32,29 @@ size_flags_vertical = 3
 custom_constants/separation = 40
 
 [node name="VBoxSide" type="VBoxContainer" parent="HBoxLayout"]
-margin_right = 71.0
+margin_right = 90.0
 margin_bottom = 580.0
 custom_constants/separation = 10
 
 [node name="ButtonReload" type="Button" parent="HBoxLayout/VBoxSide"]
-margin_right = 71.0
+margin_right = 90.0
 margin_bottom = 29.0
 text = "reload"
 
 [node name="ButtonOpenDir" type="Button" parent="HBoxLayout/VBoxSide"]
 margin_top = 39.0
-margin_right = 71.0
+margin_right = 90.0
 margin_bottom = 68.0
 text = "open dir"
 
+[node name="ButtonTestServer" type="Button" parent="HBoxLayout/VBoxSide"]
+margin_top = 78.0
+margin_right = 90.0
+margin_bottom = 107.0
+text = "test server"
+
 [node name="ScrollAbcs" type="ScrollContainer" parent="HBoxLayout"]
-margin_left = 111.0
+margin_left = 130.0
 margin_right = 1004.0
 margin_bottom = 580.0
 rect_pivot_offset = Vector2( 1581.48, 289.13 )
@@ -56,7 +62,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MarginAbcs" type="MarginContainer" parent="HBoxLayout/ScrollAbcs"]
-margin_right = 893.0
+margin_right = 874.0
 margin_bottom = 580.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -68,7 +74,7 @@ custom_constants/margin_bottom = 10
 [node name="VBoxAbcs" type="VBoxContainer" parent="HBoxLayout/ScrollAbcs/MarginAbcs"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 883.0
+margin_right = 864.0
 margin_bottom = 570.0
 rect_min_size = Vector2( 600, 300 )
 size_flags_horizontal = 3
@@ -76,14 +82,14 @@ size_flags_vertical = 3
 custom_constants/separation = 10
 
 [node name="LabelUserAbcs" type="Label" parent="HBoxLayout/ScrollAbcs/MarginAbcs/VBoxAbcs"]
-margin_right = 873.0
+margin_right = 854.0
 margin_bottom = 45.0
 custom_fonts/font = ExtResource( 1 )
 text = "user alphabets:"
 
 [node name="HFlowUserAbcs" type="Container" parent="HBoxLayout/ScrollAbcs/MarginAbcs/VBoxAbcs"]
 margin_top = 55.0
-margin_right = 873.0
+margin_right = 854.0
 margin_bottom = 155.0
 size_flags_horizontal = 3
 script = ExtResource( 4 )
@@ -102,14 +108,14 @@ margin_bottom = 100.0
 
 [node name="LabelModsAbcs" type="Label" parent="HBoxLayout/ScrollAbcs/MarginAbcs/VBoxAbcs"]
 margin_top = 165.0
-margin_right = 873.0
+margin_right = 854.0
 margin_bottom = 210.0
 custom_fonts/font = ExtResource( 1 )
 text = "mods alphabets:"
 
 [node name="HFlowModsAbcs" type="Container" parent="HBoxLayout/ScrollAbcs/MarginAbcs/VBoxAbcs"]
 margin_top = 220.0
-margin_right = 873.0
+margin_right = 854.0
 margin_bottom = 320.0
 size_flags_horizontal = 3
 script = ExtResource( 4 )

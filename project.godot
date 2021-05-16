@@ -29,6 +29,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
+Client="*res://texnomagic/client.gd"
 WoPEditor="*res://wopeditor.gd"
 
 [physics]

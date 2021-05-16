@@ -1,8 +1,9 @@
-extends Node2D
+extends Node
 
 
 var Abcs = preload("res://texnomagic/abcs.gd")
 var Server = preload("res://texnomagic/server.gd")
+
 
 var server = Server.new()
 var screens = {}
@@ -16,9 +17,11 @@ var drawing
 
 
 func _ready():
-	server.ensure_server()
 	abcs = Abcs.new()
 	abcs.load()
+	server.ensure_server()
+	Client.connect_to_server()
+	Client.connect("query_response", self, "query_response")
 	goto_screen('abcs', abcs)
 
 
@@ -66,3 +69,17 @@ func _go_back():
 func _notification(what):
 	if what == NOTIFICATION_PREDELETE:
 		server.kill_server()
+
+
+func test_server():
+	print("TEST TexnoMagic server connection...")
+	var q = {
+		'query': 'spell',
+		'text': 'big slow ice death fast homing bolt random',
+	}
+	Client.send_query(q)
+
+
+func query_response(q):
+	print("MÁM TO: %s" % q['status'])
+	print()
