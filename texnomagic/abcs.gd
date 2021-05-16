@@ -23,7 +23,7 @@ func get_alphabets(path : String):
 	
 	if error != OK:
 		print("abcs dir doesn't exist: ", path)
-		return false
+		return _abcs
 	
 	dir.list_dir_begin(true, true)
 	var abc_dir = dir.get_next()
