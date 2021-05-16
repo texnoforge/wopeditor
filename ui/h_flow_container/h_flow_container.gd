@@ -63,7 +63,7 @@ func _notification(what):
 # If apply is true, the children will actually be moved to the calculated
 # locations.
 # Returns the resulting height.
-func _calculate_layout(apply: bool) -> float:
+func _calculate_layout(_apply: bool) -> float:
 	# Where to place the next child.
 	var next_location: Vector2 = Vector2(0, 0)
 	var row_height: int = 0

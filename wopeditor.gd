@@ -2,7 +2,9 @@ extends Node2D
 
 
 var Abcs = preload("res://texnomagic/abcs.gd")
+var Server = preload("res://texnomagic/server.gd")
 
+var server = Server.new()
 var screens = {}
 var past_screens = []
 var screen = null
@@ -14,6 +16,7 @@ var drawing
 
 
 func _ready():
+	server.ensure_server()
 	abcs = Abcs.new()
 	abcs.load()
 	goto_screen('abcs', abcs)
@@ -58,4 +61,8 @@ func _go_back():
 		return
 	var prev_screen_name = past_screens.pop_back()
 	_goto_screen(prev_screen_name, null)
-	
+
+
+func _notification(what):
+	if what == NOTIFICATION_PREDELETE:
+		server.kill_server()

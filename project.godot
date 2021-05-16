@@ -15,7 +15,7 @@ _global_script_classes=[ {
 "path": "res://ui/h_flow_container/h_flow_container.gd"
 } ]
 _global_script_class_icons={
-"HFlowContainer": ""
+"HFlowContainer": "res://ui/h_flow_container/h_flow_container.svg"
 }
 
 [application]
