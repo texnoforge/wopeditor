@@ -1,0 +1,40 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Container",
+"class": "HFlowContainer",
+"language": "GDScript",
+"path": "res://ui/h_flow_container/h_flow_container.gd"
+} ]
+_global_script_class_icons={
+"HFlowContainer": ""
+}
+
+[application]
+
+config/name="wopeditor"
+config/description="Words of Power Editor of TexnoMagic"
+run/main_scene="res://screens/abcs_screen.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="WordsOfPower"
+config/icon="res://icon.png"
+
+[autoload]
+
+WoPEditor="*res://wopeditor.gd"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
