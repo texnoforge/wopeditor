@@ -1,5 +1,5 @@
 site_name: Words of Power Editor
-theme: readthedocs
+repo_url: https://github.com/texnoforge/wopeditor/
 nav:
   - README.md
   - intro.md
@@ -9,3 +9,10 @@ markdown_extensions:
   - admonition
   - toc:
       permalink: True
+theme:
+  name: material
+  logo: img/x.png
+  palette:
+    scheme: slate
+    primary: black
+    accent: cyan
