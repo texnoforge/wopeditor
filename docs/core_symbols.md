@@ -22,18 +22,16 @@ Symbols will be repeatedly drawn by mages using various pointing
 devices so **drawings** must not be overly complex or otherwise annoying to
 replicate.
 
-Finally, symbols need to be distinct. No two symbols should be similar.
+Finally, symbols need to be distinct. No two symbols should be too similar.
 
 
 ## Use wopeditor, paper, strings or whatever else you want
 
-I've [released Words of Power Editor v0.1.0][v0.1.0] which you can use to draw
-symbols using mouse (and other pointing devices) in **TexnoMagic** format
-which allows easy sharing of entire magic alphabet as a single zip fil and you
+I've [released Words of Power Editor v0.1.1][v0.1.1] which you can use to draw
+symbols using mouse (and other pointing devices) in [TexnoMagic] format
+which allows easy sharing of entire magic alphabet as a single zip file and you
 can even upload your alphabet to [wop.mod.io](https://wop.mod.io) where
 everyone with (or without) `wopeditor` can download and modify it easily.
-
-Please see [wopeditor installation](install.md), it's easy.
 
 If you don't want to use my experimental software, **please feel free to
 draw symbols using any method you want** as long as you can share a
@@ -104,5 +102,6 @@ Thanks a lot, I hope you have a creative time with symbols and concepts!
 
 
 [magic]: https://texnoforge.dev/words-of-power-devlog-1-theory-of-magic.html
+[TexnoMagic]: https://texnoforge.github.io/texnomagic/
 [discord]: https://discord.gg/Dq3vaeg3pG
-[v0.1.0]: https://github.com/texnoforge/wopeditor/releases/tag/v0.1.0
+[v0.1.1]: https://github.com/texnoforge/python-wopeditor/releases/tag/v0.1.1

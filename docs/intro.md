@@ -4,7 +4,7 @@
 app for creation, modification, distribution, and machine recognition of custom magic
 symbols in [TexnoMagic] format used in upcoming
 [texnoforge](https://texnoforge.dev)
-game [Words of Power](https://texnoforge.dev/pages/words-of-power.html)
+game [Words of Power](https://texnoforge.dev/p/words-of-power/)
 and any other games/apps that choose to adopt this free format and/or tool.
 
 The goal is to provide users with means to create and share their own custom

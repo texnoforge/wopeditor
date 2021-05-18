@@ -1,9 +1,9 @@
 site_name: Words of Power Editor
 repo_url: https://github.com/texnoforge/wopeditor/
+edit_uri: ""
 nav:
-  - README.md
+  - Overview: index.md
   - intro.md
-  - install.md
   - core_symbols.md
 markdown_extensions:
   - admonition
