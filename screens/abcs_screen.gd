@@ -15,7 +15,7 @@ func set_context(new_abcs):
 	abcs = new_abcs
 
 
-func update() -> bool:
+func update_screen() -> bool:
 	var abcs_nodes = {
 		'user': get_node("HBoxLayout/ScrollAbcs/MarginAbcs/VBoxAbcs/HFlowUserAbcs"),
 		'mods': get_node("HBoxLayout/ScrollAbcs/MarginAbcs/VBoxAbcs/HFlowModsAbcs"),

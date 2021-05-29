@@ -10,7 +10,7 @@ func set_context(new_symbol):
 	symbol = new_symbol
 
 
-func update() -> bool:
+func update_screen() -> bool:
 	var node = get_node("HBoxLayout/ScrollSymbol/MarginSymbol/VBoxSymbol/HFlowDrawings")
 	# remove current buttons
 	for ch in node.get_children():

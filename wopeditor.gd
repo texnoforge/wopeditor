@@ -50,7 +50,7 @@ func _goto_screen(name, context):
 	screen = get_screen(name)
 	if context:
 		screen.set_context(context)
-	screen.update()
+	screen.update_screen()
 	root.add_child(screen)
 	screen_name = name
 
