@@ -14,4 +14,6 @@ func _draw():
 		return
 	var curves = drawing.curves_fit_area(rect_size)
 	for curve in curves:
+		if curve.size() < 2:
+			continue
 		draw_polyline(curve, Color.white, width)
