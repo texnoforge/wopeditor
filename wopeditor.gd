@@ -21,7 +21,8 @@ func _ready():
 	abcs.load()
 	server.ensure_server()
 	Client.connect_to_server()
-	Client.connect("query_response", self, "query_response")
+	var r = Client.connect("query_response", self, "query_response")
+	assert(r == OK)
 	goto_screen('abcs', abcs)
 
 

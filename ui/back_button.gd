@@ -2,4 +2,5 @@ extends Button
 
 
 func _ready():
-	connect("pressed", WoPEditor, "go_back")
+	var r = connect("pressed", WoPEditor, "go_back")
+	assert(r == OK)

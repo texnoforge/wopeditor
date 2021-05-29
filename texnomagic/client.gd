@@ -134,7 +134,6 @@ func _send_query(data):
 
 
 func _send_string(data):
-	var size = len(data)
 	# send data
 	var r = client.put_string(data)
 	set_process(true)
