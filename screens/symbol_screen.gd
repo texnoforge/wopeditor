@@ -23,7 +23,6 @@ func update_screen() -> bool:
 	var title = get_node("HBoxLayout/ScrollSymbol/MarginSymbol/VBoxSymbol/LabelSymbol")
 	title.text = symbol.name
 
-	symbol.load_drawings()
 	for drawing in symbol.drawings:
 		var but = DrawingButton.instance()
 		but.set_context(drawing)

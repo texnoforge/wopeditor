@@ -60,3 +60,9 @@ func load_drawings() -> bool:
 		drawing_fn = dir.get_next()
 
 	return true
+
+
+func random_drawing():
+	if not drawings:
+		return null
+	return drawings[randi() % drawings.size()]

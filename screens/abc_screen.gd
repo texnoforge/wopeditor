@@ -25,6 +25,7 @@ func update_screen() -> bool:
 	
 	abc.load_symbols()
 	for symbol in abc.symbols:
+		symbol.load_drawings()
 		var but = SymbolButton.instance()
 		but.set_context(symbol)
 		but.connect("pressed", WoPEditor, 'goto_screen', ['symbol', symbol])
