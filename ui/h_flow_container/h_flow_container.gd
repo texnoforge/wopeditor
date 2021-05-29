@@ -36,11 +36,11 @@ func _get_minimum_size() -> Vector2:
 		
 		var requested_size: Vector2 = child.get_combined_minimum_size()
 		if requested_size.x > max_requested_width:
-			max_requested_width = requested_size.x
+			max_requested_width = int(requested_size.x)
 	
 	# Calculate how hight we have to be given our current width.
 	var height := _calculate_layout(false)
-	_reported_height_at_last_minimum_size_call = height
+	_reported_height_at_last_minimum_size_call = int(height)
 	
 	return Vector2(max_requested_width, height)
 
@@ -95,7 +95,7 @@ func _calculate_layout(_apply: bool) -> float:
 		fit_child_in_rect(child, Rect2(next_location, requested_size))
 		
 		if requested_size.y > row_height:
-			row_height = requested_size.y
+			row_height = int(requested_size.y)
 		
 		next_location.x += requested_size.x
 		children_in_current_row += 1
