@@ -67,9 +67,24 @@ func _go_back():
 	_goto_screen(prev_screen_name, null)
 
 
+func reload():
+	call_deferred("_reload")
+
+
+func _reload():
+	abcs.load()
+	_goto_screen('abcs', null)
+
+
 func _notification(what):
 	if what == NOTIFICATION_PREDELETE:
 		server.kill_server()
+
+
+func new_abc(_abc):
+	abcs.save_new_alphabet(_abc)
+	print("NEW alphabet: %s @ %s" % [_abc.name, _abc.path])
+	reload()
 
 
 func test_server():

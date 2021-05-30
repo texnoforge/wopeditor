@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://fonts/FontH1.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/abc_button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://screens/abcs_screen.gd" type="Script" id=3]
 [ext_resource path="res://ui/h_flow_container/h_flow_container.gd" type="Script" id=4]
 [ext_resource path="res://ui/texno_theme.tres" type="Theme" id=5]
+[ext_resource path="res://ui/dialog/abc_dialog.tscn" type="PackedScene" id=6]
 
 [node name="GUI" type="MarginContainer"]
 anchor_right = 1.0
@@ -36,21 +37,27 @@ margin_right = 90.0
 margin_bottom = 580.0
 custom_constants/separation = 10
 
-[node name="ButtonReload" type="Button" parent="HBoxLayout/VBoxSide"]
+[node name="ButtonNewAbc" type="Button" parent="HBoxLayout/VBoxSide"]
 margin_right = 90.0
 margin_bottom = 29.0
-text = "reload"
+text = "new abc"
 
-[node name="ButtonOpenDir" type="Button" parent="HBoxLayout/VBoxSide"]
+[node name="ButtonReload" type="Button" parent="HBoxLayout/VBoxSide"]
 margin_top = 39.0
 margin_right = 90.0
 margin_bottom = 68.0
-text = "open dir"
+text = "reload"
 
-[node name="ButtonTestServer" type="Button" parent="HBoxLayout/VBoxSide"]
+[node name="ButtonOpenDir" type="Button" parent="HBoxLayout/VBoxSide"]
 margin_top = 78.0
 margin_right = 90.0
 margin_bottom = 107.0
+text = "open dir"
+
+[node name="ButtonTestServer" type="Button" parent="HBoxLayout/VBoxSide"]
+margin_top = 117.0
+margin_right = 90.0
+margin_bottom = 146.0
 text = "test server"
 
 [node name="ScrollAbcs" type="ScrollContainer" parent="HBoxLayout"]
@@ -131,3 +138,13 @@ margin_left = 0.0
 margin_top = 0.0
 margin_right = 200.0
 margin_bottom = 100.0
+
+[node name="AbcDialog" parent="." instance=ExtResource( 6 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1014.0
+margin_bottom = 590.0
+
+[connection signal="pressed" from="HBoxLayout/VBoxSide/ButtonNewAbc" to="." method="_on_ButtonNewAbc_pressed"]

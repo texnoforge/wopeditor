@@ -1,11 +1,9 @@
 extends Reference
 
 
-const Common = preload("res://texnomagic/common.gd")
 const Abc = preload("res://texnomagic/abc.gd")
 
-var common = Common.new()
-var paths = common.ALPHABETS_PATHS
+var paths = Common.ALPHABETS_PATHS
 var abcs = {}
 
 
@@ -38,3 +36,12 @@ func get_alphabets(path : String):
 		abc_dir = dir.get_next()
 
 	return _abcs
+
+
+func save_new_alphabet(abc, tag='user'):
+	assert(abc.name)
+	var path = self.paths[tag] + '/' + Common.name2fn(abc.name)
+	abc.set_path(path)
+	abc.save()
+	self.abcs[tag].insert(0, abc)
+	return abc

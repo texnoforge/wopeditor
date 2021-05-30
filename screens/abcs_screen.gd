@@ -1,14 +1,17 @@
 extends Node
 
 
+const Abc = preload("res://texnomagic/abc.gd")
 const AbcButton = preload("res://ui/abc_button.tscn")
 
 var abcs = null
 
 
 func _ready():
-	var but = get_node("HBoxLayout/VBoxSide/ButtonTestServer")
-	but.connect("pressed", WoPEditor, "test_server")
+	var test = get_node("HBoxLayout/VBoxSide/ButtonTestServer")
+	test.connect("pressed", WoPEditor, "test_server")
+	var dialog = get_node("AbcDialog")
+	dialog.connect("confirmed", self, "_on_confirm")
 
 
 func set_context(new_abcs):
@@ -38,3 +41,14 @@ func update_screen() -> bool:
 				node.add_child(but)
 
 	return true
+
+
+func _on_confirm(abc, type='new'):
+	assert(type == 'new')
+	WoPEditor.call_deferred("new_abc", abc)
+
+
+func _on_ButtonNewAbc_pressed():
+	var dialog = get_node("AbcDialog")
+	var abc = Abc.new('.')
+	dialog.show_dialog(abc, 'new')

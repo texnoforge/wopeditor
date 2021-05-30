@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "PopupPanel",
+"class": "BaseDialog",
+"language": "GDScript",
+"path": "res://ui/dialog/base_dialog.gd"
+}, {
 "base": "Container",
 "class": "HFlowContainer",
 "language": "GDScript",
 "path": "res://ui/h_flow_container/h_flow_container.gd"
 } ]
 _global_script_class_icons={
+"BaseDialog": "",
 "HFlowContainer": "res://ui/h_flow_container/h_flow_container.svg"
 }
 
@@ -29,6 +35,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
+Common="*res://texnomagic/common.gd"
 Client="*res://texnomagic/client.gd"
 WoPEditor="*res://wopeditor.gd"
 

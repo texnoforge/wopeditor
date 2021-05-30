@@ -57,3 +57,15 @@ func load_symbols() -> bool:
 		symbol_dir = dir.get_next()
 	
 	return true
+
+
+func save():
+	var r = Common.makedirs(path)
+	assert(r == OK)
+	var info = {
+		'name': name,
+	}
+	var file = File.new()
+	print("SAVE abc: %s" % info_path)
+	file.open(info_path, File.WRITE)
+	file.store_string(JSON.print(info, '  '))

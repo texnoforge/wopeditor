@@ -1,0 +1,145 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://fonts/FontH1.tres" type="DynamicFont" id=1]
+[ext_resource path="res://ui/dialog/abc_dialog.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0.843137 )
+
+[node name="AbcDialog" type="PopupPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="PanelContainer" parent="CenterContainer"]
+margin_left = 505.0
+margin_top = 293.0
+margin_right = 519.0
+margin_bottom = 307.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Margin" type="MarginContainer" parent="CenterContainer/Panel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 292.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 200, 100 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/Panel/Margin"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 265.0
+margin_bottom = 149.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Header" type="Label" parent="CenterContainer/Panel/Margin/VBox"]
+margin_right = 245.0
+margin_bottom = 45.0
+custom_fonts/font = ExtResource( 1 )
+text = "Alphabet Dialog"
+align = 1
+valign = 1
+
+[node name="Grid" type="GridContainer" parent="CenterContainer/Panel/Margin/VBox"]
+margin_left = 27.0
+margin_top = 65.0
+margin_right = 217.0
+margin_bottom = 89.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/vseparation = 10
+custom_constants/hseparation = 20
+columns = 2
+
+[node name="LabelName" type="Label" parent="CenterContainer/Panel/Margin/VBox/Grid"]
+margin_top = 5.0
+margin_right = 42.0
+margin_bottom = 19.0
+text = "Name:"
+align = 2
+valign = 1
+
+[node name="EditName" type="LineEdit" parent="CenterContainer/Panel/Margin/VBox/Grid"]
+margin_left = 62.0
+margin_right = 190.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 128, 0 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Error" type="Label" parent="CenterContainer/Panel/Margin/VBox"]
+visible = false
+margin_top = 109.0
+margin_right = 245.0
+margin_bottom = 123.0
+custom_colors/font_color = Color( 0.847059, 0.498039, 0.498039, 1 )
+text = "error message"
+align = 1
+
+[node name="HBox" type="HBoxContainer" parent="CenterContainer/Panel/Margin/VBox"]
+margin_left = 65.0
+margin_top = 109.0
+margin_right = 180.0
+margin_bottom = 129.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/separation = 20
+
+[node name="Confirm" type="Button" parent="CenterContainer/Panel/Margin/VBox/HBox"]
+margin_right = 41.0
+margin_bottom = 20.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Save"
+
+[node name="Cancel" type="Button" parent="CenterContainer/Panel/Margin/VBox/HBox"]
+margin_left = 61.0
+margin_right = 115.0
+margin_bottom = 20.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Cancel"
+
+[connection signal="text_entered" from="CenterContainer/Panel/Margin/VBox/Grid/EditName" to="." method="_on_Confirm_pressed"]
+[connection signal="pressed" from="CenterContainer/Panel/Margin/VBox/HBox/Confirm" to="." method="_on_Confirm_pressed"]
+[connection signal="pressed" from="CenterContainer/Panel/Margin/VBox/HBox/Cancel" to="." method="_on_Cancel_pressed"]
