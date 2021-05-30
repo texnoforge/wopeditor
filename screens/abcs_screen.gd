@@ -1,6 +1,5 @@
 extends Node
 
-
 const Abc = preload("res://texnomagic/abc.gd")
 const AbcButton = preload("res://ui/abc_button.tscn")
 
@@ -43,7 +42,7 @@ func update_screen() -> bool:
 	return true
 
 
-func _on_confirm(abc, type='new'):
+func _on_confirm(abc, type = 'new'):
 	assert(type == 'new')
 	WoPEditor.call_deferred("new_abc", abc)
 

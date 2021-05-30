@@ -42,7 +42,7 @@ func on_submit():
 	pass
 
 
-func show_dialog(new_context, new_type='new'):
+func show_dialog(new_context, new_type = 'new'):
 	context = new_context
 	type = new_type
 	reset()
@@ -74,7 +74,7 @@ func validate():
 func submit():
 	if not validate():
 		return
-	on_submit()	
+	on_submit()
 	emit_signal("confirmed", context, type)
 	hide()
 
@@ -83,5 +83,5 @@ func _on_Cancel_pressed():
 	hide()
 
 
-func _on_Confirm_pressed(_arg=null):
+func _on_Confirm_pressed(_arg = null):
 	submit()

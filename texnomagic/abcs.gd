@@ -1,6 +1,5 @@
 extends Reference
 
-
 const Abc = preload("res://texnomagic/abc.gd")
 
 var paths = Common.ALPHABETS_PATHS
@@ -14,18 +13,18 @@ func load() -> bool:
 	return abcs
 
 
-func get_alphabets(path : String):
+func get_alphabets(path: String):
 	var _abcs = []
 	var dir = Directory.new()
 	var error = dir.open(path)
-	
+
 	if error != OK:
 		print("abcs dir doesn't exist: ", path)
 		return _abcs
-	
+
 	dir.list_dir_begin(true, true)
 	var abc_dir = dir.get_next()
-	while (abc_dir != ""):
+	while abc_dir != "":
 		if dir.current_is_dir():
 			var abc_path = path + '/' + abc_dir
 			var abc_info_path = abc_path + '/' + 'texno_alphabet.json'
@@ -38,7 +37,7 @@ func get_alphabets(path : String):
 	return _abcs
 
 
-func save_new_alphabet(abc, tag='user'):
+func save_new_alphabet(abc, tag = 'user'):
 	assert(abc.name)
 	var path = self.paths[tag] + '/' + Common.name2fn(abc.name)
 	abc.set_path(path)

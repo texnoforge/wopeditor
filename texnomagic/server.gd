@@ -1,6 +1,5 @@
 extends Reference
 
-
 var TEXNOMAGIC_SERVER_PATH = 'texnomagic-server/texnomagic-server'
 var server
 var server_path
@@ -17,7 +16,7 @@ func ensure_server():
 	else:
 		base_path = bin_path.get_base_dir()
 	print(base_path)
-	
+
 	server_path = base_path + '/' + TEXNOMAGIC_SERVER_PATH
 	if bin_ext == 'exe':
 		server_path += '.exe'

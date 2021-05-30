@@ -1,15 +1,13 @@
 extends Node
 
-
 var Abcs = preload("res://texnomagic/abcs.gd")
 var Server = preload("res://texnomagic/server.gd")
-
 
 var server = Server.new()
 var screens = {}
 var past_screens = []
 var screen = null
-var screen_name : String
+var screen_name: String
 var abcs
 var abc
 var symbol

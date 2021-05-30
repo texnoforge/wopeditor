@@ -1,7 +1,7 @@
 extends Reference
 
-var path : String
-var name : String
+var path: String
+var name: String
 var curves = []
 var points_range = 1000
 
@@ -23,7 +23,7 @@ func load() -> bool:
 		return false
 	# read CSV into curves
 	var curve = PoolVector2Array()
-	while !file.eof_reached():
+	while ! file.eof_reached():
 		var line = file.get_csv_line()
 		var n = line.size()
 		if n >= 2:

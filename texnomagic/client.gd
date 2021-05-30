@@ -22,7 +22,7 @@ func _ready():
 
 func _process(delta):
 	var status = client.get_status()
-	if status == StreamPeerTCP.STATUS_CONNECTED: 
+	if status == StreamPeerTCP.STATUS_CONNECTED:
 		if query:
 			_process_response()
 		if not query:
@@ -35,7 +35,7 @@ func _process(delta):
 
 	if error or status == StreamPeerTCP.STATUS_ERROR:
 		_server_fail("ERROR connecting to TexnoMagic server :(")
-	elif status == StreamPeerTCP.STATUS_CONNECTING: # is connecting
+	elif status == StreamPeerTCP.STATUS_CONNECTING:  # is connecting
 		t += delta
 		if t >= timeout:
 			error = true
@@ -49,7 +49,7 @@ func _process_response():
 	if n <= 0:
 		# no new data
 		return
-	
+
 	var r = client.get_data(4)
 	if r[0] != OK:
 		_query_error("FAIL receive head: ERR %s" % r[0])
@@ -58,7 +58,7 @@ func _process_response():
 	if len(head) != 4:
 		_query_error("INVALID header len: %s != 4  [%s]" % [len(head), head])
 		return
-	
+
 	r = client.get_data(n - 4)
 	if r[0] != OK:
 		_query_error("FAIL receive body: ERR %s" % r[0])
@@ -86,7 +86,7 @@ func send_query(data):
 			queue_query(data)
 		return OK
 	if error or status == StreamPeerTCP.STATUS_ERROR:
-		queue_query(data) # queue to report error
+		queue_query(data)  # queue to report error
 		_server_fail("ERROR: TexnoMagic server not available :(")
 		return FAILED
 	if status == StreamPeerTCP.STATUS_NONE:
@@ -94,7 +94,7 @@ func send_query(data):
 		connect_to_server()
 		queue_query(data)
 		return OK
-	
+
 	if status == StreamPeerTCP.STATUS_CONNECTING:
 		queue_query(data)
 		return OK
@@ -127,7 +127,7 @@ func _query_error(error_message):
 
 
 func _send_query(data):
-	assert(!query)
+	assert(! query)
 	query = data
 	var s = JSON.print(data)
 	return _send_string(s)

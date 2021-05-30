@@ -20,36 +20,37 @@ export var vertical_margin: float = 5
 # less rows to fit in all the children.
 var _reported_height_at_last_minimum_size_call := 0
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass  # Replace with function body.
 
 
 func _get_minimum_size() -> Vector2:
 	# Our minimum width is the width of the widest child.
 	var max_requested_width := 0
-	
+
 	for child in get_children():
 		# Check if the child is actually a `Control`.
 		if not child.has_method("get_combined_minimum_size"):
 			break
-		
+
 		var requested_size: Vector2 = child.get_combined_minimum_size()
 		if requested_size.x > max_requested_width:
 			max_requested_width = int(requested_size.x)
-	
+
 	# Calculate how hight we have to be given our current width.
 	var height := _calculate_layout(false)
 	_reported_height_at_last_minimum_size_call = int(height)
-	
+
 	return Vector2(max_requested_width, height)
 
 
 func _notification(what):
-	if (what==NOTIFICATION_SORT_CHILDREN):
+	if what == NOTIFICATION_SORT_CHILDREN:
 		# Must re-sort the children.
 		var height = _calculate_layout(true)
-		
+
 		if height != _reported_height_at_last_minimum_size_call:
 			# We are either smaller or larger than we thought we would
 			# be, last time we menitioned it.
@@ -69,7 +70,7 @@ func _calculate_layout(_apply: bool) -> float:
 	var row_height: int = 0
 	# Used to calculate when to apply the horizontal margin.
 	var children_in_current_row := 0
-	
+
 	for child in get_children():
 		# Check if the child is actually a `Control`.
 		if not child.has_method("get_combined_minimum_size"):
@@ -77,27 +78,27 @@ func _calculate_layout(_apply: bool) -> float:
 		if not child.visible:
 			# Ignore invisible children.
 			continue
-		
+
 		var requested_size: Vector2 = child.get_combined_minimum_size()
-		
+
 		if children_in_current_row > 0:
 			# This is not the first child in this row,
 			# which means we need to apply the margin.
 			next_location.x += horizontal_margin
-		
+
 		# Would this control fit on this row?
 		if requested_size.x + next_location.x > rect_size.x:
 			# No it would not. Go to the next row.
 			next_location = Vector2(0, next_location.y + row_height + vertical_margin)
 			row_height = 0
 			children_in_current_row = 0
-		
+
 		fit_child_in_rect(child, Rect2(next_location, requested_size))
-		
+
 		if requested_size.y > row_height:
 			row_height = int(requested_size.y)
-		
+
 		next_location.x += requested_size.x
 		children_in_current_row += 1
-	
+
 	return next_location.y + row_height

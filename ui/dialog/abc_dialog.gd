@@ -10,7 +10,7 @@ func _ready():
 
 func get_fields():
 	name_e = get_node("CenterContainer/Panel/Margin/VBox/Grid/EditName")
-	
+
 
 func reset_fields():
 	name_e.text = ''

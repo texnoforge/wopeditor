@@ -1,6 +1,5 @@
 extends Button
 
-
 var symbol
 var drawing
 

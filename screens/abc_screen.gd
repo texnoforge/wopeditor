@@ -1,6 +1,5 @@
 extends Node
 
-
 const SymbolButton = preload("res://ui/symbol_button.tscn")
 
 var abc = null
@@ -22,7 +21,7 @@ func update_screen() -> bool:
 
 	var title = get_node("HBoxLayout/ScrollAbc/MarginAbc/VBoxAbc/LabelAbc")
 	title.text = abc.name
-	
+
 	abc.load_symbols()
 	for symbol in abc.symbols:
 		symbol.load_drawings()

@@ -2,11 +2,11 @@ extends Reference
 
 const Drawing = preload("res://texnomagic/drawing.gd")
 
-var path : String
-var info_path : String
-var drawings_path : String
-var name : String
-var meaning : String
+var path: String
+var info_path: String
+var drawings_path: String
+var name: String
+var meaning: String
 var drawings = []
 
 
@@ -50,7 +50,7 @@ func load_drawings() -> bool:
 
 	dir.list_dir_begin(true, true)
 	var drawing_fn = dir.get_next()
-	while (drawing_fn != ""):
+	while drawing_fn != "":
 		if drawing_fn.get_extension() == 'csv':
 			var drawing_path = drawings_path + '/' + drawing_fn
 			if dir.file_exists(drawing_path):

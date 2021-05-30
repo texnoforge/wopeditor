@@ -1,6 +1,5 @@
 extends Control
 
-
 var drawing
 var width = 3.0
 

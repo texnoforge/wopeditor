@@ -2,10 +2,10 @@ extends Reference
 
 const Symbol = preload("res://texnomagic/symbol.gd")
 
-var path : String
-var info_path : String
-var symbols_path : String
-var name : String
+var path: String
+var info_path: String
+var symbols_path: String
+var name: String
 var symbols = []
 
 
@@ -39,14 +39,14 @@ func load_symbols() -> bool:
 	symbols = []
 	var dir = Directory.new()
 	var error = dir.open(symbols_path)
-	
+
 	if error != OK:
 		print("failed to load symbol directory: %s" % symbols_path)
 		return false
-		
+
 	dir.list_dir_begin(true, true)
 	var symbol_dir = dir.get_next()
-	while (symbol_dir != ""):
+	while symbol_dir != "":
 		if dir.current_is_dir():
 			var symbol_path = symbols_path + '/' + symbol_dir
 			var symbol_info_path = symbol_path + '/' + 'texno_symbol.json'
@@ -55,7 +55,7 @@ func load_symbols() -> bool:
 				symbol.load()
 				symbols.append(symbol)
 		symbol_dir = dir.get_next()
-	
+
 	return true
 
 

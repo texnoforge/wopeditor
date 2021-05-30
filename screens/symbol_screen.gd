@@ -1,6 +1,5 @@
 extends Node
 
-
 const DrawingButton = preload("res://ui/drawing_button.tscn")
 
 var symbol = null

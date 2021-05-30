@@ -1,6 +1,5 @@
 extends Node
 
-
 var USER_DATA_PATH = 'user://user'
 var MODS_DATA_PATH = 'user://mods'
 var EXPORT_PATH = 'user://export'
