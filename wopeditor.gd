@@ -39,6 +39,20 @@ func goto_screen(name, context):
 	call_deferred("_goto_screen", name, context)
 
 
+func get_screen_title():
+	if not screen_name or screen_name == 'abcs':
+		return 'Words of Power Editor'
+	var title = abc.name
+	if screen_name == 'abc':
+		return title
+	title += ' > %s (%s)' % [symbol.name, symbol.meaning]
+	if screen_name == 'symbol':
+		return title
+	if screen_name == 'drawing':
+		title += ' > ' + drawing.name
+	return title
+
+
 func _goto_screen(name, context):
 	var root = get_tree().get_root()
 	if screen_name and context:
@@ -56,8 +70,11 @@ func _goto_screen(name, context):
 	if context:
 		screen.set_context(context)
 	screen.update_screen()
-	root.add_child(screen)
 	screen_name = name
+	var header = screen.get_node("Header")
+	if header:
+		header.text = get_screen_title()
+	root.add_child(screen)
 
 
 func go_back():

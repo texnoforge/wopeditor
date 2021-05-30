@@ -83,5 +83,3 @@ margin_left = 0.0
 margin_top = 0.0
 margin_right = 200.0
 margin_bottom = 200.0
-
-[connection signal="pressed" from="Cols/Side/Rows/ButtonNewDrawing" to="." method="_on_ButtonNewSymbol_pressed"]
