@@ -1,7 +1,7 @@
 tool
+class_name HFlowContainer, "./h_flow_container.svg"
 extends Container
 
-class_name HFlowContainer, "./h_flow_container.svg"
 
 # The flow container will fit as many children in a row as it can
 # using their minimum size, and will then continue on the next row.
@@ -55,7 +55,7 @@ func _notification(what):
 			# We are either smaller or larger than we thought we would
 			# be, last time we menitioned it.
 			# Have our parent re-evaluate our size.
-			# TODO: Maybe find a better way instead of briefly 
+			# TODO: Maybe find a better way instead of briefly
 			#       exceeding our reported minimum size.
 			rect_min_size = Vector2(0, 20000)
 			rect_min_size = Vector2(0, 0)

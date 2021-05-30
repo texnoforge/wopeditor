@@ -95,5 +95,5 @@ func test_server():
 
 
 func query_response(q):
-	print("MÁM TO: %s" % q['status'])
+	print("QUERY RESPONSE: %s" % q['status'])
 	print()

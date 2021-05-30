@@ -2,7 +2,7 @@ extends Reference
 
 const Abc = preload("res://texnomagic/abc.gd")
 
-var paths = Common.ALPHABETS_PATHS
+var paths = Common.alphabets_paths
 var abcs = {}
 
 
@@ -14,13 +14,13 @@ func load() -> bool:
 
 
 func get_alphabets(path: String):
-	var _abcs = []
+	var abcs_l = []
 	var dir = Directory.new()
 	var error = dir.open(path)
 
 	if error != OK:
 		print("abcs dir doesn't exist: ", path)
-		return _abcs
+		return abcs_l
 
 	dir.list_dir_begin(true, true)
 	var abc_dir = dir.get_next()
@@ -31,10 +31,10 @@ func get_alphabets(path: String):
 			if dir.file_exists(abc_info_path):
 				var abc = Abc.new(abc_path)
 				abc.load()
-				_abcs.append(abc)
+				abcs_l.append(abc)
 		abc_dir = dir.get_next()
 
-	return _abcs
+	return abcs_l
 
 
 func save_new_alphabet(abc, tag = 'user'):

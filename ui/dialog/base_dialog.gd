@@ -1,5 +1,5 @@
-extends PopupPanel
 class_name BaseDialog
+extends PopupPanel
 
 signal confirmed
 
@@ -16,7 +16,7 @@ func _ready():
 
 func _gui_input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
-		# clicking outside of inner pannel closes popup   
+		# clicking outside of inner pannel closes popup
 		hide()
 
 

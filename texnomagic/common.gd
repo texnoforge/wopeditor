@@ -1,13 +1,13 @@
 extends Node
 
-var USER_DATA_PATH = 'user://user'
-var MODS_DATA_PATH = 'user://mods'
-var EXPORT_PATH = 'user://export'
+var user_data_path = 'user://user'
+var mods_data_path = 'user://mods'
+var export_path = 'user://export'
 
-var ALPHABETS_DIR = 'alphabets'
-var ALPHABETS_PATHS = {
-	'user': USER_DATA_PATH + '/' + ALPHABETS_DIR,
-	'mods': MODS_DATA_PATH + '/' + ALPHABETS_DIR,
+var alphabets_dir = 'alphabets'
+var alphabets_paths = {
+	'user': user_data_path + '/' + alphabets_dir,
+	'mods': mods_data_path + '/' + alphabets_dir,
 }
 
 
