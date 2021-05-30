@@ -65,7 +65,6 @@ func save():
 		'name': name,
 	}
 	var file = File.new()
-	print("SAVE abc: %s" % info_path)
 	file.open(info_path, File.WRITE)
 	file.store_string(JSON.print(info, '  '))
 

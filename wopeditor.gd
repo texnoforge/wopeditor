@@ -108,16 +108,17 @@ func _notification(what):
 func new_abc(_abc):
 	abcs.save_new_alphabet(_abc)
 	print("NEW alphabet: %s @ %s" % [_abc.name, _abc.path])
-	call_deferred('_reload_abcs')
+	call_deferred('_goto_screen', 'abc', _abc)
 
 
 func new_symbol(_symbol, batch = false):
 	abc.save_new_symbol(_symbol)
 	print("NEW symbol: %s @ %s" % [_symbol.name, _symbol.path])
-	_reload_abc()
 	if batch:
+		_reload_abc()
 		screen.call_deferred('show_new_symbol_dialog')
-
+	else:
+		call_deferred('_goto_screen', 'symbol', _symbol)
 
 
 func test_server():

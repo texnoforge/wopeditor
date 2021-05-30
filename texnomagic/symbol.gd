@@ -69,7 +69,6 @@ func save():
 		'meaning': meaning,
 	}
 	var file = File.new()
-	print("SAVE symbol: %s" % info_path)
 	file.open(info_path, File.WRITE)
 	file.store_string(JSON.print(info, '  '))
 
