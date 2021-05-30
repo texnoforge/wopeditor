@@ -7,23 +7,12 @@ extends Container
 # using their minimum size, and will then continue on the next row.
 # Does not use SIZE_EXPAND flags of children.
 
-# TODO: half-respect vertical SIZE_EXPAND flags by expanding the child to match
-#       the tallest child in that row?
-# TODO: Respect scaled children?
-# TODO: Can we find a way to intuitively use a child's horizontal SIZE_EXPAND
-#       flag?
-
 export var horizontal_margin: float = 5
 export var vertical_margin: float = 5
 
 # Used to make our parent re-evaluate our size when we have to create more or
 # less rows to fit in all the children.
 var _reported_height_at_last_minimum_size_call := 0
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass  # Replace with function body.
 
 
 func _get_minimum_size() -> Vector2:
@@ -55,8 +44,6 @@ func _notification(what):
 			# We are either smaller or larger than we thought we would
 			# be, last time we menitioned it.
 			# Have our parent re-evaluate our size.
-			# TODO: Maybe find a better way instead of briefly
-			#       exceeding our reported minimum size.
 			rect_min_size = Vector2(0, 20000)
 			rect_min_size = Vector2(0, 0)
 
