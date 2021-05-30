@@ -19,7 +19,6 @@ func get_alphabets(path: String):
 	var error = dir.open(path)
 
 	if error != OK:
-		print("abcs dir doesn't exist: ", path)
 		return abcs_l
 
 	dir.list_dir_begin(true, true)

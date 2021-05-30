@@ -1,89 +1,71 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://fonts/FontH1.tres" type="DynamicFont" id=1]
+[ext_resource path="res://ui/shared/header.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/screens/drawing_screen.gd" type="Script" id=2]
 [ext_resource path="res://ui/preview/drawing_preview.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/shared/header.gd" type="Script" id=4]
 [ext_resource path="res://ui/theme/texno_theme.tres" type="Theme" id=5]
-[ext_resource path="res://ui/button/back_button.tscn" type="PackedScene" id=6]
 
-[node name="GUI" type="MarginContainer"]
+[node name="Screen" type="VBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 1229.13, 600.33 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 5 )
-custom_constants/margin_right = 10
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-custom_constants/margin_bottom = 10
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxLayout" type="HBoxContainer" parent="."]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 1014.0
-margin_bottom = 590.0
+[node name="Header" type="MarginContainer" parent="." instance=ExtResource( 1 )]
+margin_right = 1024.0
+margin_bottom = 85.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_bottom = 20
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+text = "Drawing Screen"
+
+[node name="Cols" type="HBoxContainer" parent="."]
+margin_top = 89.0
+margin_right = 1024.0
+margin_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 40
 
-[node name="VBoxSide" type="VBoxContainer" parent="HBoxLayout"]
-margin_right = 71.0
-margin_bottom = 580.0
-custom_constants/separation = 10
+[node name="Side" type="MarginContainer" parent="Cols"]
+margin_right = 150.0
+margin_bottom = 511.0
+rect_min_size = Vector2( 150, 0 )
+custom_constants/margin_right = 30
+custom_constants/margin_left = 30
 
-[node name="BackButton" parent="HBoxLayout/VBoxSide" instance=ExtResource( 6 )]
-margin_right = 71.0
+[node name="Rows" type="VBoxContainer" parent="Cols/Side"]
+margin_left = 30.0
+margin_right = 120.0
+margin_bottom = 511.0
+custom_constants/separation = 20
+
+[node name="ButtonDeleteDrawing" type="Button" parent="Cols/Side/Rows"]
+margin_right = 90.0
 margin_bottom = 29.0
+text = "delete"
 
-[node name="ButtonOpenDir" type="Button" parent="HBoxLayout/VBoxSide"]
-margin_top = 39.0
-margin_right = 71.0
-margin_bottom = 68.0
-text = "open dir"
-
-[node name="ScrollDrawing" type="ScrollContainer" parent="HBoxLayout"]
-margin_left = 111.0
-margin_right = 1004.0
-margin_bottom = 580.0
+[node name="Main" type="ScrollContainer" parent="Cols"]
+margin_left = 154.0
+margin_right = 1024.0
+margin_bottom = 511.0
 rect_pivot_offset = Vector2( 1581.48, 289.13 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="MarginDrawing" type="MarginContainer" parent="HBoxLayout/ScrollDrawing"]
-margin_right = 893.0
-margin_bottom = 580.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/margin_right = 10
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-custom_constants/margin_bottom = 10
-
-[node name="VBoxDrawing" type="VBoxContainer" parent="HBoxLayout/ScrollDrawing/MarginDrawing"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 883.0
-margin_bottom = 570.0
-rect_min_size = Vector2( 600, 300 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 10
-
-[node name="LabelDrawing" type="Label" parent="HBoxLayout/ScrollDrawing/MarginDrawing/VBoxDrawing"]
-margin_right = 873.0
-margin_bottom = 45.0
-custom_fonts/font = ExtResource( 1 )
-text = "drawing"
-align = 1
-
-[node name="DrawingPreview" parent="HBoxLayout/ScrollDrawing/MarginDrawing/VBoxDrawing" instance=ExtResource( 3 )]
+[node name="DrawingPreview" parent="Cols/Main" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 55.0
-margin_right = 873.0
-margin_bottom = 560.0
+margin_right = 870.0
+margin_bottom = 511.0
+
+[connection signal="pressed" from="Cols/Side/Rows/ButtonDeleteDrawing" to="." method="_on_ButtonNewSymbol_pressed"]

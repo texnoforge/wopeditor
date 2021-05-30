@@ -15,7 +15,6 @@ func ensure_server():
 		base_path += 'dist/wopeditor'
 	else:
 		base_path = bin_path.get_base_dir()
-	print(base_path)
 
 	server_path = base_path + '/' + texnomagic_server_path
 	if bin_ext == 'exe':

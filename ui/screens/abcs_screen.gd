@@ -7,7 +7,7 @@ var abcs = null
 
 
 func _ready():
-	var test = get_node("HBoxLayout/VBoxSide/ButtonTestServer")
+	var test = get_node("Cols/Side/Rows/ButtonTestServer")
 	test.connect("pressed", WoPEditor, "test_server")
 	var dialog = get_node("AbcDialog")
 	dialog.connect("confirmed", self, "_on_confirm")
@@ -17,10 +17,10 @@ func set_context(new_abcs):
 	abcs = new_abcs
 
 
-func update_screen() -> bool:
+func update_screen():
 	var abcs_nodes = {
-		'user': get_node("HBoxLayout/ScrollAbcs/MarginAbcs/VBoxAbcs/HFlowUserAbcs"),
-		'mods': get_node("HBoxLayout/ScrollAbcs/MarginAbcs/VBoxAbcs/HFlowModsAbcs"),
+		'user': get_node("Cols/Main/Rows/HFlowUserAbcs"),
+		'mods': get_node("Cols/Main/Rows/HFlowModsAbcs"),
 	}
 	for tag in abcs_nodes:
 		var node = abcs_nodes[tag]
@@ -51,3 +51,7 @@ func _on_ButtonNewAbc_pressed():
 	var dialog = get_node("AbcDialog")
 	var abc = Abc.new('.')
 	dialog.show_dialog(abc, 'new')
+
+
+func _on_ButtonReload_pressed():
+	WoPEditor.call_deferred("_reload_abcs")

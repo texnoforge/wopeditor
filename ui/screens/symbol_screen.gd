@@ -10,7 +10,7 @@ func set_context(new_symbol):
 
 
 func update_screen() -> bool:
-	var node = get_node("HBoxLayout/ScrollSymbol/MarginSymbol/VBoxSymbol/HFlowDrawings")
+	var node = get_node("Cols/Main/HFlowDrawings")
 	# remove current buttons
 	for ch in node.get_children():
 		node.remove_child(ch)
@@ -19,8 +19,8 @@ func update_screen() -> bool:
 	if not symbol:
 		return false
 
-	var title = get_node("HBoxLayout/ScrollSymbol/MarginSymbol/VBoxSymbol/LabelSymbol")
-	title.text = symbol.name
+	var header = get_node("Header")
+	header.text = symbol.name
 
 	for drawing in symbol.drawings:
 		var but = DrawingButton.instance()

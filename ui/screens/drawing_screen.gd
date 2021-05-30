@@ -8,14 +8,14 @@ func set_context(new_drawing):
 
 
 func update_screen() -> bool:
-	var title = get_node("HBoxLayout/ScrollDrawing/MarginDrawing/VBoxDrawing/LabelDrawing")
-	var drawing_p = get_node("HBoxLayout/ScrollDrawing/MarginDrawing/VBoxDrawing/DrawingPreview")
+	var header = get_node("Header")
+	var drawing_p = get_node("Cols/Main/DrawingPreview")
 
 	if not drawing:
 		drawing_p.set_context(drawing)
-		title.text = 'drawing'
+		header.text = 'drawing'
 		return false
 
 	drawing_p.set_context(drawing)
-	title.text = drawing.name
+	header.text = drawing.name
 	return true

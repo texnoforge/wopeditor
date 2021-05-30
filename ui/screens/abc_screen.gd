@@ -16,7 +16,7 @@ func set_context(new_abc):
 
 
 func update_screen() -> bool:
-	var node = get_node("HBoxLayout/ScrollAbc/MarginAbc/VBoxAbc/HFlowSymbols")
+	var node = get_node("Cols/Main/HFlowSymbols")
 	# remove current buttons
 	for ch in node.get_children():
 		node.remove_child(ch)
@@ -25,8 +25,8 @@ func update_screen() -> bool:
 	if not abc:
 		return false
 
-	var title = get_node("HBoxLayout/ScrollAbc/MarginAbc/VBoxAbc/LabelAbc")
-	title.text = abc.name
+	var header = get_node("Header")
+	header.text = abc.name
 
 	abc.load_symbols()
 	for symbol in abc.symbols:

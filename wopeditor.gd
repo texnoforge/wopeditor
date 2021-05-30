@@ -72,11 +72,13 @@ func _go_back():
 
 
 func _reload_abcs():
+	print("RELOAD alphabets")
 	abcs.load()
 	_goto_screen('abcs', null)
 
 
 func _reload_abc():
+	print("RELOAD alphabet")
 	abc.load()
 	_goto_screen('abc', null)
 
