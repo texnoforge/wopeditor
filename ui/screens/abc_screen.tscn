@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ui/screens/abc_screen.gd" type="Script" id=1]
 [ext_resource path="res://ui/button/symbol_button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/shared/header.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/h_flow_container/h_flow_container.gd" type="Script" id=4]
 [ext_resource path="res://ui/theme/texno_theme.tres" type="Theme" id=5]
+[ext_resource path="res://ui/button/open_dir_button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ui/dialog/symbol_dialog.tscn" type="PackedScene" id=7]
 
 [node name="Screen" type="VBoxContainer"]
@@ -52,6 +53,11 @@ custom_constants/separation = 20
 margin_right = 98.0
 margin_bottom = 29.0
 text = "new symbol"
+
+[node name="OpenDirButton" parent="Cols/Side/Rows" instance=ExtResource( 6 )]
+margin_top = 49.0
+margin_right = 98.0
+margin_bottom = 78.0
 
 [node name="Main" type="ScrollContainer" parent="Cols"]
 margin_left = 162.0

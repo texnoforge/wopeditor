@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://ui/button/abc_button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/dialog/abc_dialog.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://ui/h_flow_container/h_flow_container.gd" type="Script" id=5]
 [ext_resource path="res://ui/theme/texno_theme.tres" type="Theme" id=6]
 [ext_resource path="res://ui/shared/header.tscn" type="PackedScene" id=7]
+[ext_resource path="res://ui/button/open_dir_button.tscn" type="PackedScene" id=8]
 
 [node name="Screen" type="VBoxContainer"]
 anchor_right = 1.0
@@ -54,17 +55,16 @@ margin_right = 90.0
 margin_bottom = 29.0
 text = "new abc"
 
-[node name="ButtonReload" type="Button" parent="Cols/Side/Rows"]
+[node name="OpenDirButton" parent="Cols/Side/Rows" instance=ExtResource( 8 )]
 margin_top = 49.0
 margin_right = 90.0
 margin_bottom = 78.0
-text = "reload"
 
-[node name="ButtonOpenDir" type="Button" parent="Cols/Side/Rows"]
+[node name="ButtonReload" type="Button" parent="Cols/Side/Rows"]
 margin_top = 98.0
 margin_right = 90.0
 margin_bottom = 127.0
-text = "open dir"
+text = "reload"
 
 [node name="ButtonTestServer" type="Button" parent="Cols/Side/Rows"]
 margin_top = 147.0

@@ -21,6 +21,8 @@ func update_screen() -> bool:
 
 	var header = get_node("Header")
 	header.text = symbol.name
+	var open_dir = get_node("Cols/Side/Rows/OpenDirButton")
+	open_dir.path = symbol.path
 
 	for drawing in symbol.drawings:
 		var but = DrawingButton.instance()

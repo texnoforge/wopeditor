@@ -7,10 +7,12 @@ var abcs = null
 
 
 func _ready():
-	var test = get_node("Cols/Side/Rows/ButtonTestServer")
-	test.connect("pressed", WoPEditor, "test_server")
 	var dialog = get_node("AbcDialog")
 	dialog.connect("confirmed", self, "_on_confirm")
+	var open_dir = get_node("Cols/Side/Rows/OpenDirButton")
+	open_dir.path = Common.alphabets_paths['user']
+	var test = get_node("Cols/Side/Rows/ButtonTestServer")
+	test.connect("pressed", WoPEditor, "test_server")
 
 
 func set_context(new_abcs):

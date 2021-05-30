@@ -27,6 +27,8 @@ func update_screen() -> bool:
 
 	var header = get_node("Header")
 	header.text = abc.name
+	var open_dir = get_node("Cols/Side/Rows/OpenDirButton")
+	open_dir.path = abc.path
 
 	abc.load_symbols()
 	for symbol in abc.symbols:

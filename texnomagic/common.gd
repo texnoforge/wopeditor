@@ -25,3 +25,10 @@ func makedirs(path):
 		return OK
 	d.open("user://")
 	return d.make_dir_recursive(path)
+
+
+func open_dir(path):
+	print("OPEN DIR: %s" % path)
+	var r = OS.shell_open(str("file://", path))
+	if r != OK:
+		print("ERROR: unable to open dir: %s" % r)
