@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://fonts/FontDefault.tres" type="DynamicFont" id=1]
-[ext_resource path="res://ui/drawing_button.gd" type="Script" id=2]
-[ext_resource path="res://ui/drawing_preview.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/preview/drawing_preview.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/button/drawing_button.gd" type="Script" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 40.0
@@ -23,7 +23,7 @@ rect_pivot_offset = Vector2( 1180.4, 294.494 )
 custom_styles/normal = SubResource( 1 )
 custom_fonts/font = ExtResource( 1 )
 clip_text = true
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -50,7 +50,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Preview" parent="Margin/VBox" instance=ExtResource( 3 )]
+[node name="Preview" parent="Margin/VBox" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 200.0

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://fonts/FontH1.tres" type="DynamicFont" id=1]
-[ext_resource path="res://screens/drawing_screen.gd" type="Script" id=2]
-[ext_resource path="res://ui/drawing_preview.tscn" type="PackedScene" id=3]
-[ext_resource path="res://ui/texno_theme.tres" type="Theme" id=5]
-[ext_resource path="res://ui/back_button.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ui/button/symbol_button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/screens/symbol_screen.gd" type="Script" id=3]
+[ext_resource path="res://ui/h_flow_container/h_flow_container.gd" type="Script" id=4]
+[ext_resource path="res://ui/theme/texno_theme.tres" type="Theme" id=5]
+[ext_resource path="res://ui/button/back_button.tscn" type="PackedScene" id=6]
 
 [node name="GUI" type="MarginContainer"]
 anchor_right = 1.0
@@ -17,7 +18,7 @@ custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -40,13 +41,19 @@ custom_constants/separation = 10
 margin_right = 71.0
 margin_bottom = 29.0
 
-[node name="ButtonOpenDir" type="Button" parent="HBoxLayout/VBoxSide"]
+[node name="ButtonReload" type="Button" parent="HBoxLayout/VBoxSide"]
 margin_top = 39.0
 margin_right = 71.0
 margin_bottom = 68.0
+text = "reload"
+
+[node name="ButtonOpenDir" type="Button" parent="HBoxLayout/VBoxSide"]
+margin_top = 78.0
+margin_right = 71.0
+margin_bottom = 107.0
 text = "open dir"
 
-[node name="ScrollDrawing" type="ScrollContainer" parent="HBoxLayout"]
+[node name="ScrollSymbol" type="ScrollContainer" parent="HBoxLayout"]
 margin_left = 111.0
 margin_right = 1004.0
 margin_bottom = 580.0
@@ -54,7 +61,7 @@ rect_pivot_offset = Vector2( 1581.48, 289.13 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="MarginDrawing" type="MarginContainer" parent="HBoxLayout/ScrollDrawing"]
+[node name="MarginSymbol" type="MarginContainer" parent="HBoxLayout/ScrollSymbol"]
 margin_right = 893.0
 margin_bottom = 580.0
 size_flags_horizontal = 3
@@ -64,7 +71,7 @@ custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
 
-[node name="VBoxDrawing" type="VBoxContainer" parent="HBoxLayout/ScrollDrawing/MarginDrawing"]
+[node name="VBoxSymbol" type="VBoxContainer" parent="HBoxLayout/ScrollSymbol/MarginSymbol"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 883.0
@@ -74,16 +81,28 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 10
 
-[node name="LabelDrawing" type="Label" parent="HBoxLayout/ScrollDrawing/MarginDrawing/VBoxDrawing"]
+[node name="LabelSymbol" type="Label" parent="HBoxLayout/ScrollSymbol/MarginSymbol/VBoxSymbol"]
 margin_right = 873.0
 margin_bottom = 45.0
 custom_fonts/font = ExtResource( 1 )
-text = "drawing"
+text = "symbol"
 align = 1
 
-[node name="DrawingPreview" parent="HBoxLayout/ScrollDrawing/MarginDrawing/VBoxDrawing" instance=ExtResource( 3 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="HFlowDrawings" type="Container" parent="HBoxLayout/ScrollSymbol/MarginSymbol/VBoxSymbol"]
 margin_top = 55.0
 margin_right = 873.0
-margin_bottom = 560.0
+margin_bottom = 155.0
+size_flags_horizontal = 3
+script = ExtResource( 4 )
+horizontal_margin = 10.0
+vertical_margin = 10.0
+
+[node name="SymbolButton" parent="HBoxLayout/ScrollSymbol/MarginSymbol/VBoxSymbol/HFlowDrawings" instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 200.0
+margin_bottom = 100.0

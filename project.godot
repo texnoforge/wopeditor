@@ -28,7 +28,7 @@ _global_script_class_icons={
 
 config/name="wopeditor"
 config/description="Words of Power Editor of TexnoMagic"
-run/main_scene="res://screens/abcs_screen.tscn"
+run/main_scene="res://ui/screens/abcs_screen.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="WordsOfPower"
 config/icon="res://icon.png"

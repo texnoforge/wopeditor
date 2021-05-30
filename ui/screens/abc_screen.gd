@@ -1,6 +1,6 @@
 extends Node
 
-const SymbolButton = preload("res://ui/symbol_button.tscn")
+const SymbolButton = preload("res://ui/button/symbol_button.tscn")
 
 var abc = null
 

@@ -1,7 +1,7 @@
 extends Node
 
 const Abc = preload("res://texnomagic/abc.gd")
-const AbcButton = preload("res://ui/abc_button.tscn")
+const AbcButton = preload("res://ui/button/abc_button.tscn")
 
 var abcs = null
 

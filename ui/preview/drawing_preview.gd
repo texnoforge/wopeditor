@@ -15,4 +15,4 @@ func _draw():
 	for curve in curves:
 		if curve.size() < 2:
 			continue
-		draw_polyline(curve, Color.white, width)
+		draw_polyline(curve, Color.white, width, true)

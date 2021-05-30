@@ -26,7 +26,7 @@ func _ready():
 
 func load_screen(name):
 	print("loading screen: %s" % name)
-	return load("res://screens/%s_screen.tscn" % name).instance()
+	return load("res://ui/screens/%s_screen.tscn" % name).instance()
 
 
 func get_screen(name):
