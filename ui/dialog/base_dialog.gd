@@ -3,6 +3,7 @@ extends PopupPanel
 
 signal confirmed
 
+var batch = false
 var context
 var context_name = 'thing'
 var type = 'new'
@@ -51,7 +52,7 @@ func show_dialog(new_context, new_type = 'new'):
 
 func reset():
 	reset_fields()
-	header_l.text = '%s %s' % [type, context_name]
+	header_l.text = ('%s %s' % [type, context_name]).capitalize()
 	hide_error()
 
 
@@ -75,8 +76,7 @@ func submit():
 	if not validate():
 		return
 	on_submit()
-	emit_signal("confirmed", context, type)
-	hide()
+	emit_signal("confirmed", context, type, batch)
 
 
 func _on_Cancel_pressed():

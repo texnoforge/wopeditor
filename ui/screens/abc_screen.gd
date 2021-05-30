@@ -1,8 +1,14 @@
 extends Node
 
+const Symbol = preload("res://texnomagic/symbol.gd")
 const SymbolButton = preload("res://ui/button/symbol_button.tscn")
 
 var abc = null
+
+
+func _ready():
+	var dialog = get_node("SymbolDialog")
+	dialog.connect("confirmed", self, "_on_confirm")
 
 
 func set_context(new_abc):
@@ -31,3 +37,18 @@ func update_screen() -> bool:
 		node.add_child(but)
 
 	return true
+
+
+func show_new_symbol_dialog():
+	var dialog = get_node("SymbolDialog")
+	var symbol = Symbol.new('.')
+	dialog.show_dialog(symbol, 'new')
+
+
+func _on_ButtonNewSymbol_pressed():
+	show_new_symbol_dialog()
+
+
+func _on_confirm(symbol, type = 'new', batch = false):
+	assert(type == 'new')
+	WoPEditor.call_deferred("new_symbol", symbol, batch)

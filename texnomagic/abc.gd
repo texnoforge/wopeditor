@@ -19,7 +19,7 @@ func set_path(new_path):
 	symbols_path = path + '/' + 'symbols'
 
 
-func load() -> bool:
+func load():
 	var info_file = File.new()
 	var error = info_file.open(info_path, File.READ)
 	if error != OK:
@@ -35,13 +35,12 @@ func load() -> bool:
 	return true
 
 
-func load_symbols() -> bool:
+func load_symbols():
 	symbols = []
 	var dir = Directory.new()
 	var error = dir.open(symbols_path)
 
 	if error != OK:
-		print("failed to load symbol directory: %s" % symbols_path)
 		return false
 
 	dir.list_dir_begin(true, true)
@@ -69,3 +68,12 @@ func save():
 	print("SAVE abc: %s" % info_path)
 	file.open(info_path, File.WRITE)
 	file.store_string(JSON.print(info, '  '))
+
+
+func save_new_symbol(symbol):
+	assert(symbol.name)
+	var spath = symbols_path + '/' + Common.name2fn(symbol.name)
+	symbol.set_path(spath)
+	symbol.save()
+	symbols.insert(0, symbol)
+	return symbol

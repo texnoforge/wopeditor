@@ -43,6 +43,12 @@ func _goto_screen(name, context):
 	var root = get_tree().get_root()
 	if screen_name and context:
 		past_screens.append(screen_name)
+		if name == 'abc':
+			abc = context
+		elif name == 'symbol':
+			symbol = context
+		elif name == 'drawing':
+			drawing = context
 	# remove current active screen
 	var prev_screen = root.get_child(root.get_child_count() - 1)
 	root.remove_child(prev_screen)
@@ -65,13 +71,14 @@ func _go_back():
 	_goto_screen(prev_screen_name, null)
 
 
-func reload():
-	call_deferred("_reload")
-
-
-func _reload():
+func _reload_abcs():
 	abcs.load()
 	_goto_screen('abcs', null)
+
+
+func _reload_abc():
+	abc.load()
+	_goto_screen('abc', null)
 
 
 func _notification(what):
@@ -82,7 +89,16 @@ func _notification(what):
 func new_abc(_abc):
 	abcs.save_new_alphabet(_abc)
 	print("NEW alphabet: %s @ %s" % [_abc.name, _abc.path])
-	reload()
+	call_deferred('_reload_abcs')
+
+
+func new_symbol(_symbol, batch = false):
+	abc.save_new_symbol(_symbol)
+	print("NEW symbol: %s @ %s" % [_symbol.name, _symbol.path])
+	_reload_abc()
+	if batch:
+		screen.call_deferred('show_new_symbol_dialog')
+
 
 
 func test_server():

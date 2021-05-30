@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://fonts/FontH1.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/button/symbol_button.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://ui/h_flow_container/h_flow_container.gd" type="Script" id=4]
 [ext_resource path="res://ui/theme/texno_theme.tres" type="Theme" id=5]
 [ext_resource path="res://ui/button/back_button.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ui/dialog/symbol_dialog.tscn" type="PackedScene" id=7]
 
 [node name="GUI" type="MarginContainer"]
 anchor_right = 1.0
@@ -33,28 +34,28 @@ size_flags_vertical = 3
 custom_constants/separation = 40
 
 [node name="VBoxSide" type="VBoxContainer" parent="HBoxLayout"]
-margin_right = 71.0
+margin_right = 98.0
 margin_bottom = 580.0
 custom_constants/separation = 10
 
 [node name="BackButton" parent="HBoxLayout/VBoxSide" instance=ExtResource( 6 )]
-margin_right = 71.0
+margin_right = 98.0
 margin_bottom = 29.0
 
-[node name="ButtonReload" type="Button" parent="HBoxLayout/VBoxSide"]
+[node name="ButtonNewSymbol" type="Button" parent="HBoxLayout/VBoxSide"]
 margin_top = 39.0
-margin_right = 71.0
+margin_right = 98.0
 margin_bottom = 68.0
-text = "reload"
+text = "new symbol"
 
 [node name="ButtonOpenDir" type="Button" parent="HBoxLayout/VBoxSide"]
 margin_top = 78.0
-margin_right = 71.0
+margin_right = 98.0
 margin_bottom = 107.0
 text = "open dir"
 
 [node name="ScrollAbc" type="ScrollContainer" parent="HBoxLayout"]
-margin_left = 111.0
+margin_left = 138.0
 margin_right = 1004.0
 margin_bottom = 580.0
 rect_pivot_offset = Vector2( 1581.48, 289.13 )
@@ -62,7 +63,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MarginAbc" type="MarginContainer" parent="HBoxLayout/ScrollAbc"]
-margin_right = 893.0
+margin_right = 866.0
 margin_bottom = 580.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -74,7 +75,7 @@ custom_constants/margin_bottom = 10
 [node name="VBoxAbc" type="VBoxContainer" parent="HBoxLayout/ScrollAbc/MarginAbc"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 883.0
+margin_right = 856.0
 margin_bottom = 570.0
 rect_min_size = Vector2( 600, 300 )
 size_flags_horizontal = 3
@@ -82,7 +83,7 @@ size_flags_vertical = 3
 custom_constants/separation = 10
 
 [node name="LabelAbc" type="Label" parent="HBoxLayout/ScrollAbc/MarginAbc/VBoxAbc"]
-margin_right = 873.0
+margin_right = 846.0
 margin_bottom = 45.0
 custom_fonts/font = ExtResource( 1 )
 text = "ABC"
@@ -90,8 +91,8 @@ align = 1
 
 [node name="HFlowSymbols" type="Container" parent="HBoxLayout/ScrollAbc/MarginAbc/VBoxAbc"]
 margin_top = 55.0
-margin_right = 873.0
-margin_bottom = 155.0
+margin_right = 846.0
+margin_bottom = 255.0
 size_flags_horizontal = 3
 script = ExtResource( 4 )
 horizontal_margin = 10.0
@@ -105,4 +106,14 @@ anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 0.0
 margin_right = 200.0
-margin_bottom = 100.0
+margin_bottom = 200.0
+
+[node name="SymbolDialog" parent="." instance=ExtResource( 7 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1014.0
+margin_bottom = 590.0
+
+[connection signal="pressed" from="HBoxLayout/VBoxSide/ButtonNewSymbol" to="." method="_on_ButtonNewSymbol_pressed"]

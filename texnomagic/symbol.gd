@@ -20,7 +20,7 @@ func set_path(new_path):
 	drawings_path = path + '/' + 'drawings'
 
 
-func load() -> bool:
+func load():
 	var info_file = File.new()
 	var error = info_file.open(info_path, File.READ)
 	if error != OK:
@@ -39,13 +39,12 @@ func load() -> bool:
 	return true
 
 
-func load_drawings() -> bool:
+func load_drawings():
 	drawings = []
 	var dir = Directory.new()
 	var error = dir.open(drawings_path)
 
 	if error != OK:
-		print("failed to load drawing directory: %s" % drawings_path)
 		return false
 
 	dir.list_dir_begin(true, true)
@@ -60,6 +59,19 @@ func load_drawings() -> bool:
 		drawing_fn = dir.get_next()
 
 	return true
+
+
+func save():
+	var r = Common.makedirs(path)
+	assert(r == OK)
+	var info = {
+		'name': name,
+		'meaning': meaning,
+	}
+	var file = File.new()
+	print("SAVE symbol: %s" % info_path)
+	file.open(info_path, File.WRITE)
+	file.store_string(JSON.print(info, '  '))
 
 
 func random_drawing():

@@ -42,7 +42,7 @@ func update_screen() -> bool:
 	return true
 
 
-func _on_confirm(abc, type = 'new'):
+func _on_confirm(abc, type = 'new', _batch = false):
 	assert(type == 'new')
 	WoPEditor.call_deferred("new_abc", abc)
 
