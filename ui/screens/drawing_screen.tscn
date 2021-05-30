@@ -57,16 +57,17 @@ margin_right = 90.0
 margin_bottom = 78.0
 text = "delete"
 
-[node name="Main" type="ScrollContainer" parent="Cols"]
+[node name="Main" type="MarginContainer" parent="Cols"]
 margin_left = 154.0
 margin_right = 1024.0
 margin_bottom = 511.0
-rect_pivot_offset = Vector2( 1581.48, 289.13 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/margin_right = 30
+custom_constants/margin_bottom = 30
 
 [node name="DrawingPreview" parent="Cols/Main" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 870.0
-margin_bottom = 511.0
+margin_right = 840.0
+margin_bottom = 481.0
