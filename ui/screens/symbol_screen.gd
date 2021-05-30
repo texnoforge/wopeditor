@@ -29,3 +29,7 @@ func update_screen() -> bool:
 		node.add_child(but)
 
 	return true
+
+
+func _on_ButtonNewDrawing_pressed():
+	WoPEditor.goto_screen('new_drawing', symbol)

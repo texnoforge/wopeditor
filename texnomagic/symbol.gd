@@ -73,6 +73,19 @@ func save():
 	file.store_string(JSON.print(info, '  '))
 
 
+func save_new_drawing(drawing):
+	assert(drawing.curves and drawing.curves.size() >= 1)
+	Common.makedirs(drawings_path)
+	var fn = '%s_%s.csv' % [Common.name2fn(name), OS.get_unix_time()]
+	var dpath = drawings_path + '/' + fn
+	print("SAVE NEW DRAWING: %s" % dpath)
+	drawing.set_path(dpath)
+	var r = drawing.save()
+	if r == OK:
+		drawings.insert(0, drawing)
+	return r
+
+
 func random_drawing():
 	if not drawings:
 		return null

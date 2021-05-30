@@ -35,10 +35,6 @@ func get_screen(name):
 	return screens[name]
 
 
-func goto_screen(name, context):
-	call_deferred("_goto_screen", name, context)
-
-
 func get_screen_title():
 	if not screen_name or screen_name == 'abcs':
 		return 'Words of Power Editor'
@@ -50,10 +46,16 @@ func get_screen_title():
 		return title
 	if screen_name == 'drawing':
 		title += ' > ' + drawing.name
+	elif screen_name == 'new_drawing':
+		title += ' > New Drawing'
 	return title
 
 
-func _goto_screen(name, context):
+func goto_screen(name, context = null):
+	call_deferred("_goto_screen", name, context)
+
+
+func _goto_screen(name, context = null):
 	var root = get_tree().get_root()
 	if screen_name and context:
 		past_screens.append(screen_name)
@@ -119,6 +121,25 @@ func new_symbol(_symbol, batch = false):
 		screen.call_deferred('show_new_symbol_dialog')
 	else:
 		call_deferred('_goto_screen', 'symbol', _symbol)
+
+
+func new_drawing(_drawing, batch = false):
+	_drawing.normalize()
+	var r = symbol.save_new_drawing(_drawing)
+	if r == OK:
+		print("NEW drawing: %s curves" % _drawing.curves.size())
+	else:
+		print("ERROR SAVING new drawing: %s" % r)
+	if batch:
+		screen.call_deferred('update_screen')
+	else:
+		call_deferred('_goto_screen', 'drawing', _drawing)
+
+
+func delete_drawing(_drawing):
+	_drawing.delete()
+	symbol.load_drawings()
+	go_back()
 
 
 func test_server():

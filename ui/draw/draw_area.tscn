@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/draw/draw_area.gd" type="Script" id=1]
+[ext_resource path="res://fonts/FontH1.tres" type="DynamicFont" id=2]
+
+[node name="DrawArea" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Info" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Rows" type="VBoxContainer" parent="Info"]
+margin_left = 320.0
+margin_top = 265.0
+margin_right = 703.0
+margin_bottom = 334.0
+mouse_filter = 2
+custom_constants/separation = 10
+
+[node name="DrawHere" type="Label" parent="Info/Rows"]
+margin_right = 383.0
+margin_bottom = 45.0
+custom_fonts/font = ExtResource( 2 )
+text = "DRAW HERE"
+align = 1
+valign = 1
+
+[node name="Hint" type="Label" parent="Info/Rows"]
+margin_top = 55.0
+margin_right = 383.0
+margin_bottom = 69.0
+text = "BIGGER is BETTER due to input device resolution limitations"

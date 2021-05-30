@@ -18,3 +18,7 @@ func update_screen() -> bool:
 	drawing_p.set_context(drawing)
 	open_dir_b.path = drawing.path.get_base_dir()
 	return true
+
+
+func _on_ButtonDeleteDrawing_pressed():
+	WoPEditor.call_deferred('delete_drawing', drawing)

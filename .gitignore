@@ -4,3 +4,4 @@ export_presets.cfg
 *.translation
 /site
 /dist/wopeditor
+/dist/html
