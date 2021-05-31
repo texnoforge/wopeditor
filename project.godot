@@ -31,7 +31,9 @@ config/description="Words of Power Editor of TexnoMagic"
 run/main_scene="res://ui/screens/abcs_screen.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="WordsOfPower"
-config/icon="res://icon.png"
+config/icon="res://icons/icon.png"
+config/windows_native_icon="res://icons/icon.ico"
+config/quit_on_go_back=false
 
 [autoload]
 

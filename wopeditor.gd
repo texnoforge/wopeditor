@@ -1,5 +1,8 @@
 extends Node
 
+# wopeditor version
+const version = '0.4.0'
+
 var Abcs = preload("res://texnomagic/abcs.gd")
 var Server = preload("res://texnomagic/server.gd")
 
@@ -15,6 +18,7 @@ var drawing
 
 
 func _ready():
+	OS.set_window_title("Words of Power Editor - wopeditor-%s by texnoforge" % version)
 	abcs = Abcs.new()
 	abcs.load()
 	server.ensure_server()
