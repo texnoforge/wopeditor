@@ -1,17 +1,20 @@
 extends Node
 
-signal query_response
+signal response
 
 var host = '127.0.0.1'
 var port = 6969
 var timeout = 0.2
 
 var client = StreamPeerTCP.new()
+var jsonrpc = JSONRPC.new()
 var t = 0.0
+var last_id := 0
 
 var error = false
 var queue = []
-var query = null
+var request = null
+var requests = {}
 
 
 func _ready():
@@ -23,12 +26,12 @@ func _ready():
 func _process(delta):
 	var status = client.get_status()
 	if status == StreamPeerTCP.STATUS_CONNECTED:
-		if query:
+		if request:
 			_process_response()
-		if not query:
+		if not request:
 			if queue:
-				var data = queue.pop_front()
-				_send_query(data)
+				var req = queue.pop_front()
+				_send_request(req)
 			else:
 				set_process(false)
 		return
@@ -52,101 +55,106 @@ func _process_response():
 
 	var r = client.get_data(4)
 	if r[0] != OK:
-		_query_error("FAIL receive head: ERR %s" % r[0])
-		return
+		return _response_error(JSONRPC.PARSE_ERROR, "FAIL receive head: ERR %s" % r[0])
 	var head = r[1]
 	if len(head) != 4:
-		_query_error("INVALID header len: %s != 4  [%s]" % [len(head), head])
-		return
+		return _response_error(JSONRPC.PARSE_ERROR, "INVALID header len: %s != 4  [%s]" % [len(head), head])
 
 	r = client.get_data(n - 4)
 	if r[0] != OK:
-		_query_error("FAIL receive body: ERR %s" % r[0])
-		return
+		return _response_error(JSONRPC.PARSE_ERROR, "FAIL receive body: ERR %s" % r[0])
 	var body = PoolByteArray(r[1]).get_string_from_utf8()
 	r = JSON.parse(body)
-	var resp = null
 	if r.error:
-		_query_error("INVALID JSON in reponse: %s" % r.error_string)
-		return
-	resp = r.result
-	_query_response(resp)
+		return _response_error(JSONRPC.PARSE_ERROR, "INVALID JSON in reponse: %s" % r.error_string)
+	_response(r.result)
 
 
-func send_query(data):
+func queue_request(req):
+	print("QUEUE: %s" % req)
+	queue.append(req)
+	set_process(true)
+
+
+func send_request(_method, _params=[]):
+	last_id += 1
+	var req = jsonrpc.make_request(_method, _params, last_id)
 	var status = client.get_status()
-
-	print("SEND %s (status %s/%s)" % [data, status, error])
+	
 	if status == StreamPeerTCP.STATUS_CONNECTED:
-		if not query:
+		if not request:
 			# client free - send immediately
-			_send_query(data)
+			_send_request(req)
 		else:
 			# already processing another request
-			queue_query(data)
+			queue_request(req)
 		return OK
 	if error or status == StreamPeerTCP.STATUS_ERROR:
-		queue_query(data)  # queue to report error
+		queue_request(req)  # queue to report error
 		_server_fail("ERROR: TexnoMagic server not available :(")
 		return FAILED
 	if status == StreamPeerTCP.STATUS_NONE:
 		# auto (re)connect
 		connect_to_server()
-		queue_query(data)
+		queue_request(req)
 		return OK
 
 	if status == StreamPeerTCP.STATUS_CONNECTING:
-		queue_query(data)
+		queue_request(req)
 		return OK
 
 	print("ERROR: unexpected TexnoMagic server fail (%s)" % status)
 	return FAILED
 
 
-func queue_query(data):
-	queue.append(data)
-	set_process(true)
-
-
-func _query_response(response):
-	print("RECV %s" % response)
-	emit_signal("query_response", response)
-	query = null
-
-
-func _query_error(error_message):
-	var q = 'error'
-	if query:
-		q = query.get('query', 'error')
-	var resp = {
-		'query': q,
-		'status': 'error',
-		'error_message': error_message,
-	}
-	_query_response(resp)
-
-
-func _send_query(data):
-	assert(! query)
-	query = data
-	var s = JSON.print(data)
+func _send_request(req):
+	print("SEND: %s" % req)
+	var id = req['id']
+	assert(id)
+	id = str(id)
+	assert(! request)
+	request = req
+	requests[id] = req
+	var s = JSON.print(req)
 	return _send_string(s)
 
 
 func _send_string(data):
-	# send data
 	var r = client.put_string(data)
 	set_process(true)
 	return r
 
 
+func _response(response):
+	print("RECV: %s" % response)
+	var id = response.get('id')
+	if id:
+		id = str(id)
+	var req = null
+	if id in requests:
+		req = requests[id]
+		requests.erase(id)
+	else:
+		print("WARNING: no request found for response")
+	emit_signal("response", response, req)
+	request = null
+
+
+func _response_error(code, message):
+	var id = null
+	if request:
+		id = request.get('id', null)
+	var err = jsonrpc.make_response_error(code, message, id)
+	_response(err)
+
+
 func _server_fail(msg):
 	# unable to connect to server
-	if not query:
-		query = queue.pop_front()
-	while query:
-		_query_error(msg)
-		query = queue.pop_front()
+	if not request:
+		request = queue.pop_front()
+	while request:
+		_response_error(-32000, msg)
+		request = queue.pop_front()
 	error = true
 	set_process(false)
 
@@ -163,6 +171,7 @@ func connect_to_server():
 
 
 func disconnect_from_server():
+	print("DISONNECTING from TexnoMagic server %s:%s ..." % [host, port])
 	client.disconnect_from_host()
 	set_process(false)
 

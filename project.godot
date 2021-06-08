@@ -18,11 +18,37 @@ _global_script_classes=[ {
 "class": "HFlowContainer",
 "language": "GDScript",
 "path": "res://ui/h_flow_container/h_flow_container.gd"
+}, {
+"base": "Reference",
+"class": "WAT",
+"language": "GDScript",
+"path": "res://addons/WAT/namespace.gd"
+}, {
+"base": "Node",
+"class": "WATTest",
+"language": "GDScript",
+"path": "res://addons/WAT/core/test/test.gd"
 } ]
 _global_script_class_icons={
 "BaseDialog": "",
-"HFlowContainer": "res://ui/h_flow_container/h_flow_container.svg"
+"HFlowContainer": "res://ui/h_flow_container/h_flow_container.svg",
+"WAT": "",
+"WATTest": ""
 }
+
+[WAT]
+
+Test_Directory="res://tests"
+Results_Directory="res://tests"
+Test_Metadata_Directory="res://tests"
+Tags=PoolStringArray(  )
+Window_Size=Vector2( 1280, 720 )
+Minimize_Window_When_Running_Tests=true
+Port=6008
+Run_All_Tests=Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"unicode":0,"echo":false,"script":null)
+
+Auto_Refresh_Tests=true
+Display=8
 
 [application]
 
@@ -40,6 +66,15 @@ config/quit_on_go_back=false
 Common="*res://texnomagic/common.gd"
 Client="*res://texnomagic/client.gd"
 WoPEditor="*res://wopeditor.gd"
+
+[display]
+
+window/size/width=1280
+window/size/height=720
+
+[editor_plugins]
+
+enabled=PoolStringArray(  )
 
 [physics]
 

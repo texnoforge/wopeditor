@@ -1,13 +1,16 @@
 extends Reference
 
 const Drawing = preload("res://texnomagic/drawing.gd")
+const Model = preload("res://texnomagic/model.gd")
 
 var path: String
 var info_path: String
 var drawings_path: String
+var model_path: String
 var name: String
 var meaning: String
-var drawings = []
+var drawings := []
+var model
 
 
 func _init(new_path):
@@ -18,6 +21,7 @@ func set_path(new_path):
 	path = new_path
 	info_path = path + '/' + 'texno_symbol.json'
 	drawings_path = path + '/' + 'drawings'
+	model_path = path + '/' + 'model'
 
 
 func load():
@@ -59,6 +63,12 @@ func load_drawings():
 		drawing_fn = dir.get_next()
 
 	return true
+
+
+func load_model():
+	model = Model.new(model_path)
+	assert(model)
+	model.load()
 
 
 func save():

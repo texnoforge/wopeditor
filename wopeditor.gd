@@ -23,7 +23,7 @@ func _ready():
 	abcs.load()
 	server.ensure_server()
 	Client.connect_to_server()
-	var r = Client.connect("query_response", self, "query_response")
+	var r = Client.connect("response", self, "request_response")
 	assert(r == OK)
 	goto_screen('abcs', abcs)
 
@@ -52,6 +52,8 @@ func get_screen_title():
 		title += ' > ' + drawing.name
 	elif screen_name == 'new_drawing':
 		title += ' > New Drawing'
+	elif screen_name == 'model':
+		title += ' > Model'
 	return title
 
 
@@ -108,6 +110,7 @@ func _reload_abc():
 
 func _notification(what):
 	if what == NOTIFICATION_PREDELETE:
+		Client.disconnect_from_server()
 		server.kill_server()
 
 
@@ -134,6 +137,7 @@ func new_drawing(_drawing, batch = false):
 		print("NEW drawing: %s curves" % _drawing.curves.size())
 	else:
 		print("ERROR SAVING new drawing: %s" % r)
+		return
 	if batch:
 		screen.call_deferred('update_screen')
 	else:
@@ -146,15 +150,48 @@ func delete_drawing(_drawing):
 	go_back()
 
 
+func update_model_preview(_symbol):
+	Client.send_request('model_preview', {
+			'abc': abc.name,
+			'symbol': _symbol.name,
+		})
+
+
+func train_model(_symbol, n_gauss=0):
+	var params = {
+		'abc': abc.name,
+		'symbol': _symbol.name,
+	}
+	if n_gauss > 0:
+		params['n_gauss'] = n_gauss
+	Client.send_request('train_symbol', params)
+
+
 func test_server():
 	print("TEST TexnoMagic server connection...")
-	var q = {
-		'query': 'spell',
-		'text': 'big slow ice death fast homing bolt random',
-	}
-	Client.send_query(q)
+	Client.send_request('version')
 
 
-func query_response(q):
-	print("QUERY RESPONSE: %s" % q['status'])
-	print()
+func request_response(resp, req):
+	if ! ('result' in resp):
+		print("REQUEST ERROR: %s" % resp['error']['message'])
+		return
+	var _method = null
+	if req:
+		_method = req.get('method')
+
+	if _method == 'model_preview':
+		var p = resp.get('result')
+		print("GOT MODEL PREVIEW: %s" % p)
+		symbol.model.preview = p
+		if screen_name == 'model':
+			screen.update_screen()
+	elif _method == 'train_symbol':
+		print("MODEL TRAINED: %s" % req['params']['symbol'])
+		symbol.load_model()
+		if screen_name == 'model':
+			screen.set_context(symbol)
+	elif _method == 'version':
+		print("TexnoMagic server %s online \\o/" % resp['result'])
+	else:
+		print("UNHANDLED response for %s: %s" % [_method, resp])

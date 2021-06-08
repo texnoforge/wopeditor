@@ -10,6 +10,8 @@ var alphabets_paths = {
 	'mods': mods_data_path + '/' + alphabets_dir,
 }
 
+var points_range = 1000.0
+
 
 func name2fn(name):
 	var rex = RegEx.new()

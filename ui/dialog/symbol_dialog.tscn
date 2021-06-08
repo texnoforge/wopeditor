@@ -29,10 +29,10 @@ __meta__ = {
 }
 
 [node name="Panel" type="PanelContainer" parent="CenterContainer"]
-margin_left = 505.0
-margin_top = 293.0
-margin_right = 519.0
-margin_bottom = 307.0
+margin_left = 633.0
+margin_top = 353.0
+margin_right = 647.0
+margin_bottom = 367.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 __meta__ = {

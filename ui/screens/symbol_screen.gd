@@ -33,3 +33,7 @@ func update_screen() -> bool:
 
 func _on_ButtonNewDrawing_pressed():
 	WoPEditor.goto_screen('new_drawing', symbol)
+
+
+func _on_ModelButton_pressed():
+	WoPEditor.goto_screen('model', symbol)

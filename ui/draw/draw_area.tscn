@@ -22,10 +22,10 @@ __meta__ = {
 }
 
 [node name="Rows" type="VBoxContainer" parent="Info"]
-margin_left = 320.0
-margin_top = 265.0
-margin_right = 703.0
-margin_bottom = 334.0
+margin_left = 448.0
+margin_top = 325.0
+margin_right = 831.0
+margin_bottom = 394.0
 mouse_filter = 2
 custom_constants/separation = 10
 
