@@ -63,8 +63,6 @@ config/quit_on_go_back=false
 
 [autoload]
 
-Common="*res://texnomagic/common.gd"
-Client="*res://texnomagic/client.gd"
 WoPEditor="*res://wopeditor.gd"
 
 [display]
@@ -74,7 +72,7 @@ window/size/height=720
 
 [editor_plugins]
 
-enabled=PoolStringArray(  )
+enabled=PoolStringArray( "res://addons/WAT/plugin.cfg" )
 
 [physics]
 

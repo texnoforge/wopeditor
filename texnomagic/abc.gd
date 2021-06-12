@@ -1,6 +1,9 @@
 extends Reference
 
+const Common = preload("res://texnomagic/common.gd")
 const Symbol = preload("res://texnomagic/symbol.gd")
+
+var common = Common.new()
 
 var path: String
 var info_path: String
@@ -59,7 +62,7 @@ func load_symbols():
 
 
 func save():
-	var r = Common.makedirs(path)
+	var r = common.makedirs(path)
 	assert(r == OK)
 	var info = {
 		'name': name,
@@ -71,7 +74,7 @@ func save():
 
 func save_new_symbol(symbol):
 	assert(symbol.name)
-	var spath = symbols_path + '/' + Common.name2fn(symbol.name)
+	var spath = symbols_path + '/' + common.name2fn(symbol.name)
 	symbol.set_path(spath)
 	symbol.save()
 	symbols.insert(0, symbol)

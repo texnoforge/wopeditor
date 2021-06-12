@@ -1,22 +1,22 @@
 extends WAT.Test
 
 
-const _Client = preload("res://texnomagic/client.gd")
+const Client = preload("res://texnomagic/client.gd")
 const Server = preload("res://texnomagic/server.gd")
 
-var client = _Client.new()
+var client = Client.new()
 var server = Server.new()
 
 
 func pre():
-	#server.ensure_server()
+	# server.ensure_server()
 	client.connect_to_server()
 	add_child(client)
 	yield(until_timeout(0.2), YIELD)
 
 
 func post():
-	print("POST TEST")
+	remove_child(client)
 	client.disconnect_from_server()
 
 
@@ -25,12 +25,20 @@ func test_connection_status():
 	asserts.is_equal(status, StreamPeerTCP.STATUS_CONNECTED, "client is CONNECTED")
 
 
+func test_version():
+	client.send_request('version')
+	var emit_vals: Array = yield(until_signal(client, "response", 0.5), YIELD)
+	var reply = emit_vals[0]
+	var version = reply.get('result')
+	asserts.is_String(version, "got version: %s" % version)
+
+
 func test_invalid_query():
 	client.send_request('KEKW')
 	var emit_vals: Array = yield(until_signal(client, "response", 0.5), YIELD)
 	var reply = emit_vals[0]
 	asserts.is_not_null(reply, "got response")
-	asserts.is_equal(reply['error_message'], "invalid request format - no query", "expected error response")
+	asserts.is_less_than(reply['error']['code'], 0, "expected error response")
 
 
 func test_model_preview_missing():
@@ -38,5 +46,4 @@ func test_model_preview_missing():
 	var emit_vals: Array = yield(until_signal(client, "response", 0.5), YIELD)
 	var reply = emit_vals[0]
 	asserts.is_not_null(reply, "got response")
-	asserts.is_equal(reply['status'], "error", "error response")
-	asserts.string_begins_with("missing required arg", reply['error_message'], "error message")
+	asserts.is_not_null(reply.get('error'), "error response")

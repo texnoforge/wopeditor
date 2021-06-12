@@ -2,6 +2,9 @@ extends Node
 
 signal response
 
+const Common = preload("res://texnomagic/common.gd")
+var common = Common.new()
+
 var host = '127.0.0.1'
 var port = 6969
 var timeout = 0.2
@@ -20,7 +23,12 @@ var requests = {}
 func _ready():
 	# don't waste frames unless expecting data
 	set_process(false)
-	#client.set_no_delay(true)
+	# client.set_no_delay(true)
+
+
+func _notification(what):
+	if what == NOTIFICATION_PREDELETE:
+		disconnect_from_server()
 
 
 func _process(delta):
@@ -71,7 +79,7 @@ func _process_response():
 
 
 func queue_request(req):
-	print("QUEUE: %s" % Common.shorten(str(req)))
+	print("QUEUE: %s" % common.shorten(str(req)))
 	queue.append(req)
 	set_process(true)
 
@@ -108,7 +116,7 @@ func send_request(_method, _params=[]):
 
 
 func _send_request(req):
-	print("SEND: %s" % Common.shorten(str(req)))
+	print("SEND: %s" % common.shorten(str(req)))
 	var id = req['id']
 	assert(id)
 	id = str(id)
@@ -126,7 +134,7 @@ func _send_string(data):
 
 
 func _response(response):
-	print("RECV: %s" % Common.shorten(str(response)))
+	print("RECV: %s" % common.shorten(str(response)))
 	var id = response.get('id')
 	if id:
 		id = str(id)

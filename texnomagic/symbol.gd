@@ -1,7 +1,10 @@
 extends Reference
 
+const Common = preload("res://texnomagic/common.gd")
 const Drawing = preload("res://texnomagic/drawing.gd")
 const Model = preload("res://texnomagic/model.gd")
+
+var common = Common.new()
 
 var path: String
 var info_path: String
@@ -72,7 +75,7 @@ func load_model():
 
 
 func save():
-	var r = Common.makedirs(path)
+	var r = common.makedirs(path)
 	assert(r == OK)
 	var info = {
 		'name': name,
@@ -85,8 +88,8 @@ func save():
 
 func save_new_drawing(drawing):
 	assert(drawing.curves and drawing.curves.size() >= 1)
-	Common.makedirs(drawings_path)
-	var fn = '%s_%s.csv' % [Common.name2fn(name), OS.get_unix_time()]
+	common.makedirs(drawings_path)
+	var fn = '%s_%s.csv' % [common.name2fn(name), OS.get_unix_time()]
 	var dpath = drawings_path + '/' + fn
 	print("SAVE NEW DRAWING: %s" % dpath)
 	drawing.set_path(dpath)

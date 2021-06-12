@@ -4,9 +4,12 @@ extends Node
 const version = '0.4.0'
 
 var Abcs = preload("res://texnomagic/abcs.gd")
+var Client = preload("res://texnomagic/client.gd")
 var Server = preload("res://texnomagic/server.gd")
 
+var client = Client.new()
 var server = Server.new()
+
 var screens = {}
 var past_screens = []
 var screen = null
@@ -22,10 +25,16 @@ func _ready():
 	abcs = Abcs.new()
 	abcs.load()
 	server.ensure_server()
-	Client.connect_to_server()
-	var r = Client.connect("response", self, "request_response")
+	client.connect_to_server()
+	add_child(client)
+	var r = client.connect("response", self, "request_response")
 	assert(r == OK)
 	goto_screen('abcs', abcs)
+
+
+func _notification(what):
+	if what == NOTIFICATION_PREDELETE:
+		server.kill_server()
 
 
 func load_screen(name):
@@ -108,12 +117,6 @@ func _reload_abc():
 	_goto_screen('abc', null)
 
 
-func _notification(what):
-	if what == NOTIFICATION_PREDELETE:
-		Client.disconnect_from_server()
-		server.kill_server()
-
-
 func new_abc(_abc):
 	abcs.save_new_alphabet(_abc)
 	print("NEW alphabet: %s @ %s" % [_abc.name, _abc.path])
@@ -151,7 +154,7 @@ func delete_drawing(_drawing):
 
 
 func update_model_preview(_symbol):
-	Client.send_request('model_preview', {
+	client.send_request('model_preview', {
 			'abc': abc.name,
 			'symbol': _symbol.name,
 		})
@@ -164,12 +167,12 @@ func train_model(_symbol, n_gauss=0):
 	}
 	if n_gauss > 0:
 		params['n_gauss'] = n_gauss
-	Client.send_request('train_symbol', params)
+	client.send_request('train_symbol', params)
 
 
 func test_server():
 	print("TEST TexnoMagic server connection...")
-	Client.send_request('version')
+	client.send_request('version')
 
 
 func request_response(resp, req):

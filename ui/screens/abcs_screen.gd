@@ -2,6 +2,9 @@ extends Node
 
 const Abc = preload("res://texnomagic/abc.gd")
 const AbcButton = preload("res://ui/button/abc_button.tscn")
+const Common = preload("res://texnomagic/common.gd")
+
+var common = Common.new()
 
 var abcs = null
 
@@ -10,7 +13,7 @@ func _ready():
 	var dialog = get_node("AbcDialog")
 	dialog.connect("confirmed", self, "_on_confirm")
 	var open_dir = get_node("Cols/Side/Rows/OpenDirButton")
-	open_dir.path = Common.alphabets_paths['user']
+	open_dir.path = common.alphabets_paths['user']
 	var test = get_node("Cols/Side/Rows/ButtonTestServer")
 	test.connect("pressed", WoPEditor, "test_server")
 

@@ -35,5 +35,3 @@ func kill_server():
 	if server and server > 0:
 		var r = OS.kill(server)
 		print("KILL TexnoMagic server %s: %s" % [server, r])
-	else:
-		print("TexnoMagic server not running")

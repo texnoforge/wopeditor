@@ -1,6 +1,9 @@
 extends Control
 
+const Common = preload("res://texnomagic/common.gd")
 const Ellipse = preload("res://ui/draw/ellipse.tscn")
+
+var common = Common.new()
 
 var symbol
 var label
@@ -46,8 +49,8 @@ func _draw():
 			draw_polyline(curve, color_drawing, 3)
 
 	# display ellipses for GMM components
-	var k = min(rect_size.x, rect_size.y) / Common.points_range
-	var max_range = Common.points_range * k
+	var k = min(rect_size.x, rect_size.y) / common.points_range
+	var max_range = common.points_range * k
 	var offset = Vector2(rect_size.x - max_range, rect_size.y - max_range) / 2
 
 	for i in len(comps):
