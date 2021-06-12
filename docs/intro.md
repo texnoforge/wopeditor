@@ -1,6 +1,6 @@
 # Intro
 
-**Words of Power Editor** (or `wopeditor`) is going to be a free and open source
+**Words of Power Editor** (or `wopeditor`) is a Free and Open Source
 app for creation, modification, distribution, and machine recognition of custom magic
 symbols in [TexnoMagic] format used in upcoming
 [texnoforge](https://texnoforge.dev)
@@ -13,36 +13,34 @@ collecting enough drawings of a symbol, a model can be trained and used to
 recognize the symbol from user input.
 
 Entire alphabets of symbols with names, meanings, and graphical
-representations can be created including models to recognize individual
-symbols drawn by users in real-time (once it's done).
+representations can be created and shared including models to recognize
+individual symbols drawn by users in real-time.
 
 Please see [TexnoMagic] library which provides technical implementation.
 
 
-## Planned Features
+## Features
 
 ### UI
 
-* create new alphabets and symbols
-* draw symbols using mouse and save to files
+* create, edit, save, and load TexnoMagic alphabets and symbols
+* draw symbols using mouse (or other pointing/touch device) and save to files
 * train symbol models which can be used to recognize user drawn symbols
+* visual previews of symbol models
+* TODO: test real-time symbol recognition
 * browse and preview symbols loaded from disk
 * easily open relevant files in file manager
 
-### mods
+### mods / community
 
-* show and download mods from [wop.mod.io]
+* WiP: show and download mods from [wop.mod.io]
 * export symbols/alphabets to zip files/[wop.mod.io]
 
 ### code
 
-* code is split into small files arranged in a sustainable modular structure including UI
-* clean reusable UI code for loading and displaying alphabets/symbols/drawings from disk
-* separate `texnomagic` module to easily interface and work with
-  symbol/alphabet data on disk - logic separate from UI
-* `wopeditor` module can be imported locally but it's also ready be packaged using
-  `setuptools` for PyPI, using `PyInstaller` for Windows, and using native
-  packaging tools for linux distros
+* written in Godot Engine's native GDScript which is easy to work with (python-ish)
+* UI code is split into small files arranged in a sustainable modular structure
+* integration with [TexnoMagic] through JSON-RPC over TCP (TexnoMagic client)
 
 * **more**
 

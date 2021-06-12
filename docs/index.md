@@ -6,7 +6,7 @@ custom magic symbols in [TexnoMagic] format used in upcoming
 [texnoforge] game [Words of Power] and any other games/apps
 that choose to adopt this open format and/or tool.
 
-Read more in [intro](intro.md).
+Learn more in **[Intro](intro.md)**.
 
 
 ## Status
