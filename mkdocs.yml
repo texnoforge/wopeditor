@@ -4,6 +4,7 @@ edit_uri: ""
 nav:
   - Overview: index.md
   - intro.md
+  - install.md
   - core_symbols.md
 markdown_extensions:
   - admonition

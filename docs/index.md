@@ -20,17 +20,9 @@ You can use previous [python-wopeditor] until this new Godot version
 reaches feature parity.
 
 
-## Usage
+## Installation
 
-Simply open the project in [Godot Editor](https://godotengine.org/download):
-
-```
-git clone https://github.com/texnoforge/wopeditor
-cd wopeditor
-godot project.godot
-```
-
-Native binaries will be provided in the future.
+Please see **[Installation](install.md)**.
 
 
 ## Bugs and Feature Requests

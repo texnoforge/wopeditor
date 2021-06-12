@@ -18,22 +18,10 @@ _global_script_classes=[ {
 "class": "HFlowContainer",
 "language": "GDScript",
 "path": "res://ui/h_flow_container/h_flow_container.gd"
-}, {
-"base": "Reference",
-"class": "WAT",
-"language": "GDScript",
-"path": "res://addons/WAT/namespace.gd"
-}, {
-"base": "Node",
-"class": "WATTest",
-"language": "GDScript",
-"path": "res://addons/WAT/core/test/test.gd"
 } ]
 _global_script_class_icons={
 "BaseDialog": "",
-"HFlowContainer": "res://ui/h_flow_container/h_flow_container.svg",
-"WAT": "",
-"WATTest": ""
+"HFlowContainer": "res://ui/h_flow_container/h_flow_container.svg"
 }
 
 [WAT]
@@ -72,7 +60,7 @@ window/size/height=720
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/WAT/plugin.cfg" )
+enabled=PoolStringArray(  )
 
 [physics]
 
