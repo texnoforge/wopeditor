@@ -182,7 +182,7 @@ func request_response(resp, req):
 
 	if _method == 'model_preview':
 		var p = resp.get('result')
-		print("GOT MODEL PREVIEW: %s" % p)
+		print("GOT MODEL PREVIEW: %s" % req['params'])
 		symbol.model.preview = p
 		if screen_name == 'model':
 			screen.update_screen()

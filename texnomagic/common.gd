@@ -34,3 +34,9 @@ func open_dir(path):
 	var r = OS.shell_open(str("file://", path))
 	if r != OK:
 		print("ERROR: unable to open dir: %s" % r)
+
+
+func shorten(s, max_len=70):
+	if len(s) > max_len:
+		s = s.left(max_len) + '...'
+	return s

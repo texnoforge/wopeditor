@@ -71,7 +71,7 @@ func _process_response():
 
 
 func queue_request(req):
-	print("QUEUE: %s" % req)
+	print("QUEUE: %s" % Common.shorten(str(req)))
 	queue.append(req)
 	set_process(true)
 
@@ -80,7 +80,7 @@ func send_request(_method, _params=[]):
 	last_id += 1
 	var req = jsonrpc.make_request(_method, _params, last_id)
 	var status = client.get_status()
-	
+
 	if status == StreamPeerTCP.STATUS_CONNECTED:
 		if not request:
 			# client free - send immediately
@@ -108,7 +108,7 @@ func send_request(_method, _params=[]):
 
 
 func _send_request(req):
-	print("SEND: %s" % req)
+	print("SEND: %s" % Common.shorten(str(req)))
 	var id = req['id']
 	assert(id)
 	id = str(id)
@@ -126,7 +126,7 @@ func _send_string(data):
 
 
 func _response(response):
-	print("RECV: %s" % response)
+	print("RECV: %s" % Common.shorten(str(response)))
 	var id = response.get('id')
 	if id:
 		id = str(id)
