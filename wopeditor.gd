@@ -5,9 +5,11 @@ const version = '0.4.0'
 
 var Abcs = preload("res://texnomagic/abcs.gd")
 var Client = preload("res://texnomagic/client.gd")
+var Common = preload("res://texnomagic/common.gd")
 var Server = preload("res://texnomagic/server.gd")
 
 var client = Client.new()
+var common = Common.new()
 var server = Server.new()
 
 var screens = {}
@@ -175,6 +177,11 @@ func test_server():
 	client.send_request('version')
 
 
+func export_abc(_abc):
+	print("EXPORT alphabet: %s" % _abc.name)
+	client.send_request('export_abc', {'abc': _abc.name})
+
+
 func request_response(resp, req):
 	if ! ('result' in resp):
 		print("REQUEST ERROR: %s" % resp['error']['message'])
@@ -194,6 +201,10 @@ func request_response(resp, req):
 		symbol.load_model()
 		if screen_name == 'model':
 			screen.set_context(symbol)
+	elif _method == 'export_abc':
+		var abc_path = resp['result']
+		print("EXPORTED alphabet: %s" % abc_path)
+		common.open_dir(abc_path.get_base_dir())
 	elif _method == 'version':
 		print("TexnoMagic server %s online \\o/" % resp['result'])
 	else:

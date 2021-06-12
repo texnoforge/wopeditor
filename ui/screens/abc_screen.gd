@@ -48,10 +48,14 @@ func show_new_symbol_dialog():
 	dialog.show_dialog(symbol, 'new')
 
 
+func _on_confirm(symbol, type = 'new', batch = false):
+	assert(type == 'new')
+	WoPEditor.call_deferred("new_symbol", symbol, batch)
+
+
 func _on_ButtonNewSymbol_pressed():
 	show_new_symbol_dialog()
 
 
-func _on_confirm(symbol, type = 'new', batch = false):
-	assert(type == 'new')
-	WoPEditor.call_deferred("new_symbol", symbol, batch)
+func _on_ExportButton_pressed():
+	WoPEditor.call_deferred("export_abc", abc)
