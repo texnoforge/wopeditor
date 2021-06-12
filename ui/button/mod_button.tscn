@@ -1,0 +1,84 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://ui/button/mod_button.gd" type="Script" id=1]
+[ext_resource path="res://fonts/FontH1.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/button/button_style.tres" type="StyleBox" id=3]
+[ext_resource path="res://fonts/FontH2.tres" type="DynamicFont" id=4]
+
+[node name="ModButton" type="Button"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -170.0
+margin_top = -109.0
+margin_right = 170.0
+margin_bottom = 132.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 340, 218 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 2 )
+clip_text = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Center" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Margin" type="MarginContainer" parent="Center"]
+margin_right = 340.0
+margin_bottom = 244.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="Center/Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 330.0
+margin_bottom = 234.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Texture" type="TextureRect" parent="Center/Margin/VBox"]
+margin_right = 320.0
+margin_bottom = 180.0
+rect_min_size = Vector2( 320, 180 )
+mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="Center/Margin/VBox"]
+margin_top = 190.0
+margin_right = 320.0
+margin_bottom = 224.0
+custom_fonts/font = ExtResource( 4 )
+text = "mod alphabet"
+align = 1
+valign = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]

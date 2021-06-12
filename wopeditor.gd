@@ -6,11 +6,13 @@ const version = '0.4.0'
 var Abcs = preload("res://texnomagic/abcs.gd")
 var Client = preload("res://texnomagic/client.gd")
 var Common = preload("res://texnomagic/common.gd")
+var Mod = preload("res://texnomagic/mod.gd")
 var Server = preload("res://texnomagic/server.gd")
 
 var client = Client.new()
 var common = Common.new()
 var server = Server.new()
+var http = HTTPRequest.new()
 
 var screens = {}
 var past_screens = []
@@ -20,19 +22,30 @@ var abcs
 var abc
 var symbol
 var drawing
+var mods
 
 
 func _ready():
 	OS.set_window_title("Words of Power Editor - wopeditor-%s by texnoforge" % version)
+	# load TexnoMagic alphabets
 	abcs = Abcs.new()
 	abcs.load()
+	# start TexnoMagic server and connect to it
 	server.ensure_server()
 	client.connect_to_server()
 	add_child(client)
 	var r = client.connect("response", self, "request_response")
 	assert(r == OK)
-	goto_screen('abcs', abcs)
+	add_child(http)
+	# query online Words of Power mods
+	r = http.connect("request_completed", self, "http_got_mods")
+	assert(r == OK)
+	get_online_mods()
+	goto_screen('abcs', {'abcs': abcs, 'mods': mods})
 
+func get_online_mods():
+	print("QUERY online mods @ wop.mod.io")
+	http.request(common.MODIO_MODS_URL_GET)
 
 func _notification(what):
 	if what == NOTIFICATION_PREDELETE:
@@ -205,7 +218,38 @@ func request_response(resp, req):
 		var abc_path = resp['result']
 		print("EXPORTED alphabet: %s" % abc_path)
 		common.open_dir(abc_path.get_base_dir())
+	elif _method == 'download_mod':
+		print("GOT MOD: %s" % req['params'])
+		call_deferred('_reload_abcs')
 	elif _method == 'version':
 		print("TexnoMagic server %s online \\o/" % resp['result'])
 	else:
 		print("UNHANDLED response for %s: %s" % [_method, resp])
+
+
+func http_got_mods(result, _response_code, _headers, body):
+	if result != OK:
+		print("ERROR getting online mods :()")
+		return
+	var body_str = body.get_string_from_utf8()
+	var json = JSON.parse(body_str)
+	var _mods = json.result.get('data')
+	mods = []
+	for mdata in _mods:
+		var mod = Mod.new()
+		mod.load_from_data(mdata)
+		mods.append(mod)
+	print("GOT %s online mods <3" % len(mods))
+	var abcs_screen = get_screen('abcs')
+	abcs_screen.set_context({'abcs': abcs, 'mods': mods})
+	if screen_name == 'abcs':
+		screen.update_screen()
+
+
+func get_mod(_mod):
+	print("GET MOD: %s" % _mod)
+	if screen_name == 'abcs':
+		var but = screen.get_mod_button(_mod)
+		if but:
+			but.disabled = true
+	client.send_request('download_mod', [_mod.mod_name_id])
