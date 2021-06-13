@@ -1,6 +1,6 @@
 extends Reference
 
-var texnomagic_server_path = 'texnomagic-server/texnomagic-server'
+var texnomagic_path = 'texnomagic/texnomagic'
 var server
 var server_path
 var server_args
@@ -17,8 +17,8 @@ func ensure_server():
 	else:
 		base_path = bin_path.get_base_dir()
 
-	server_args = []
-	server_path = base_path + '/' + texnomagic_server_path
+	server_args = ['server']
+	server_path = base_path + '/' + texnomagic_path
 	if bin_ext == 'exe':
 		server_path += '.exe'
 	if File.new().file_exists(server_path):
@@ -27,7 +27,6 @@ func ensure_server():
 		server_path = 'texnomagic'
 		if bin_ext == 'exe':
 			server_path += '.exe'
-		server_args = ['server']
 		print("START system TexnoMagic server: %s" % server_path)
 
 	server = OS.execute(server_path, server_args, false)
