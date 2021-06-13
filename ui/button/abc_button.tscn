@@ -2,7 +2,7 @@
 
 [ext_resource path="res://fonts/FontH1.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/button/abc_button.gd" type="Script" id=2]
-[ext_resource path="res://ui/button/button_style.tres" type="StyleBox" id=3]
+[ext_resource path="res://ui/theme/button_style.tres" type="StyleBox" id=3]
 
 [node name="AbcButton" type="Button"]
 anchor_left = 0.5
