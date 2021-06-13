@@ -73,6 +73,10 @@ func _draw():
 		# var weight = comp[3]
 
 		el.rect_size = size * k
+		if el.rect_size.x < 3:
+			el.rect_size.x = 3
+		if el.rect_size.y < 3:
+			el.rect_size.y = 3
 		el.rect_pivot_offset = el.rect_size / 2
 		el.rect_rotation = angle
 		el.rect_position = pos * k + offset - el.rect_pivot_offset
