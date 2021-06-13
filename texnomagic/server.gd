@@ -3,6 +3,7 @@ extends Reference
 var texnomagic_server_path = 'texnomagic-server/texnomagic-server'
 var server
 var server_path
+var server_args
 
 
 func ensure_server():
@@ -16,18 +17,24 @@ func ensure_server():
 	else:
 		base_path = bin_path.get_base_dir()
 
+	server_args = []
 	server_path = base_path + '/' + texnomagic_server_path
 	if bin_ext == 'exe':
 		server_path += '.exe'
-	if not File.new().file_exists(server_path):
-		print("TexnoMagic server not found: %s" % server_path)
-		return false
-	print("START TexnoMagic server: %s" % server_path)
-	server = OS.execute(server_path, [], false)
-	if server > 0:
-		print("SUCCESS TexnoMagic server started with PID: %s" % server)
+	if File.new().file_exists(server_path):
+		print("START binary TexnoMagic server: %s" % server_path)
 	else:
-		print("FAIL to start TexnoMagic server: %s" % server)
+		server_path = 'texnomagic'
+		if bin_ext == 'exe':
+			server_path += '.exe'
+		server_args = ['server']
+		print("START system TexnoMagic server: %s" % server_path)
+
+	server = OS.execute(server_path, server_args, false)
+	if server > 0:
+		print("STARTED TexnoMagic server with PID: %s" % server)
+	else:
+		print("FAILED to start TexnoMagic server: %s" % server)
 	return true
 
 
