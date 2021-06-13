@@ -44,10 +44,14 @@ func update_screen():
 		scores_node.add_child(ss)
 
 
-func _on_ButtonRecognize_pressed():
+func do_recognize():
 	WoPEditor.recognize_top(abc, $Cols/Main/DrawArea.curves_json(), 8)
 
 
 func _on_ButtonClear_pressed():
 	clear()
 	update_screen()
+
+
+func _on_DrawArea_drawing_modified():
+	do_recognize()

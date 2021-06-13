@@ -262,6 +262,7 @@ func request_response(resp, req):
 	elif _method == 'download_mod':
 		print("GOT MOD: %s" % req['params'])
 		call_deferred('_reload_abcs')
+		client.send_request('reload')
 	elif _method == 'version':
 		print("TexnoMagic server %s online \\o/" % resp['result'])
 	elif _method == 'reload':

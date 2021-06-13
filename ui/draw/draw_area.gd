@@ -1,5 +1,6 @@
 extends Control
 
+signal drawing_modified
 
 var is_drawing = false
 var curve = PoolVector2Array()
@@ -58,12 +59,14 @@ func end_drawing():
 		curves.append(curve)
 	curve = PoolVector2Array()
 	is_drawing = false
+	emit_signal("drawing_modified")
 
 
 func undo():
 	if curves.size() >= 1:
 		curves.pop_back()
 		update()
+		emit_signal("drawing_modified")
 
 
 func got_curves():
