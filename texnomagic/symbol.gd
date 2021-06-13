@@ -69,9 +69,12 @@ func load_drawings():
 
 
 func load_model():
-	model = Model.new(model_path)
-	assert(model)
-	model.load()
+	var _model = Model.new(model_path)
+	var r = _model.load()
+	if r:
+		model = _model
+	else:
+		model = null
 
 
 func save():

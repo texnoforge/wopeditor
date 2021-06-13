@@ -79,3 +79,10 @@ func save_new_symbol(symbol):
 	symbol.save()
 	symbols.insert(0, symbol)
 	return symbol
+
+
+func get_symbol_by_name(symbol_name):
+	for s in self.symbols:
+		if s.name == symbol_name:
+			return s
+	return null

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://ui/screens/abc_screen.gd" type="Script" id=1]
 [ext_resource path="res://ui/button/symbol_button.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://ui/theme/texno_theme.tres" type="Theme" id=5]
 [ext_resource path="res://ui/button/open_dir_button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ui/dialog/symbol_dialog.tscn" type="PackedScene" id=7]
+[ext_resource path="res://ui/shared/hsep.tscn" type="PackedScene" id=8]
 
 [node name="Screen" type="VBoxContainer"]
 anchor_right = 1.0
@@ -54,15 +55,28 @@ margin_right = 98.0
 margin_bottom = 29.0
 text = "new symbol"
 
-[node name="OpenDirButton" parent="Cols/Side/Rows" instance=ExtResource( 6 )]
+[node name="RecognizeButton" type="Button" parent="Cols/Side/Rows"]
 margin_top = 49.0
 margin_right = 98.0
 margin_bottom = 78.0
+text = "recognize"
 
-[node name="ExportButton" type="Button" parent="Cols/Side/Rows"]
+[node name="HSep" parent="Cols/Side/Rows" instance=ExtResource( 8 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 98.0
 margin_right = 98.0
-margin_bottom = 127.0
+margin_bottom = 108.0
+
+[node name="OpenDirButton" parent="Cols/Side/Rows" instance=ExtResource( 6 )]
+margin_top = 128.0
+margin_right = 98.0
+margin_bottom = 157.0
+
+[node name="ExportButton" type="Button" parent="Cols/Side/Rows"]
+margin_top = 177.0
+margin_right = 98.0
+margin_bottom = 206.0
 text = "export"
 
 [node name="Main" type="ScrollContainer" parent="Cols"]
@@ -100,4 +114,5 @@ margin_right = 994.0
 margin_bottom = 570.0
 
 [connection signal="pressed" from="Cols/Side/Rows/NewSymbolButton" to="." method="_on_ButtonNewSymbol_pressed"]
+[connection signal="pressed" from="Cols/Side/Rows/RecognizeButton" to="." method="_on_RecognizeButton_pressed"]
 [connection signal="pressed" from="Cols/Side/Rows/ExportButton" to="." method="_on_ExportButton_pressed"]

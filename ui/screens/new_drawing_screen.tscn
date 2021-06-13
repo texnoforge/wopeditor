@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/shared/header.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/screens/new_drawing_screen.gd" type="Script" id=2]
 [ext_resource path="res://ui/draw/draw_area.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/shared/hsep.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/theme/texno_theme.tres" type="Theme" id=5]
 
 [node name="Screen" type="VBoxContainer"]
@@ -21,21 +22,21 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 0.0
-margin_right = 1024.0
+margin_right = 1280.0
 margin_bottom = 85.0
 custom_constants/margin_right = 20
 text = "New Drawing Screen"
 
 [node name="Cols" type="HBoxContainer" parent="."]
 margin_top = 89.0
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_right = 1280.0
+margin_bottom = 706.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Side" type="MarginContainer" parent="Cols"]
 margin_right = 183.0
-margin_bottom = 511.0
+margin_bottom = 617.0
 rect_min_size = Vector2( 150, 0 )
 custom_constants/margin_right = 30
 custom_constants/margin_left = 30
@@ -43,7 +44,7 @@ custom_constants/margin_left = 30
 [node name="Rows" type="VBoxContainer" parent="Cols/Side"]
 margin_left = 30.0
 margin_right = 153.0
-margin_bottom = 511.0
+margin_bottom = 617.0
 custom_constants/separation = 20
 
 [node name="ButtonSave" type="Button" parent="Cols/Side/Rows"]
@@ -71,16 +72,23 @@ text = "clear"
 
 [node name="Main" type="MarginContainer" parent="Cols"]
 margin_left = 187.0
-margin_right = 1024.0
-margin_bottom = 511.0
+margin_right = 1280.0
+margin_bottom = 617.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="DrawArea" parent="Cols/Main" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 837.0
-margin_bottom = 511.0
+margin_right = 1093.0
+margin_bottom = 617.0
+
+[node name="HSep" parent="." instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 710.0
+margin_right = 1280.0
+margin_bottom = 720.0
 
 [connection signal="pressed" from="Cols/Side/Rows/ButtonSave" to="." method="_save" flags=3]
 [connection signal="pressed" from="Cols/Side/Rows/ButtonUndo" to="Cols/Main/DrawArea" method="undo" flags=3]

@@ -4,11 +4,6 @@ extends Control
 var is_drawing = false
 var curve = PoolVector2Array()
 var curves = []
-var info
-
-
-func _ready():
-	info = get_node("Info")
 
 
 func _gui_input(event):
@@ -35,23 +30,30 @@ func _draw():
 			draw_polyline(c, Color.white, 2, true)
 
 
+func curves_json():
+	var json = []
+	for c in curves:
+		var jcurve = []
+		for p in c:
+			jcurve.append([p.x, p.y])
+		json.append(jcurve)
+	return json
+
+
 func clear():
-	print("CLEAR")
 	is_drawing = false
 	curve = PoolVector2Array()
 	curves = []
-	info.visible = true
+	$Info.visible = true
 	update()
 
 
 func start_drawing():
-	print("START DRAW")
 	is_drawing = true
-	info.visible = false
+	$Info.visible = false
 
 
 func end_drawing():
-	print("END DRAW")
 	if curve.size() >= 2:
 		curves.append(curve)
 	curve = PoolVector2Array()
@@ -59,7 +61,6 @@ func end_drawing():
 
 
 func undo():
-	print("UNDO")
 	if curves.size() >= 1:
 		curves.pop_back()
 		update()

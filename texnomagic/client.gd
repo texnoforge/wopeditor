@@ -41,7 +41,6 @@ func _process(delta):
 				var req = queue.pop_front()
 				_send_request(req)
 			else:
-				print("CLIENT has no work - sleeping")
 				set_process(false)
 		return
 

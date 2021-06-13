@@ -59,3 +59,7 @@ func _on_ButtonNewSymbol_pressed():
 
 func _on_ExportButton_pressed():
 	WoPEditor.call_deferred("export_abc", abc)
+
+
+func _on_RecognizeButton_pressed():
+	WoPEditor.goto_screen("recognize_abc", abc)

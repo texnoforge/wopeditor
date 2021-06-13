@@ -57,21 +57,28 @@ margin_right = 90.0
 margin_bottom = 29.0
 text = "new abc"
 
-[node name="OpenDirButton" parent="Cols/Side/Rows" instance=ExtResource( 8 )]
+[node name="HSep" parent="Cols/Side/Rows" instance=ExtResource( 10 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 49.0
 margin_right = 90.0
-margin_bottom = 78.0
+margin_bottom = 59.0
+
+[node name="OpenDirButton" parent="Cols/Side/Rows" instance=ExtResource( 8 )]
+margin_top = 79.0
+margin_right = 90.0
+margin_bottom = 108.0
 
 [node name="ButtonReload" type="Button" parent="Cols/Side/Rows"]
-margin_top = 98.0
+margin_top = 128.0
 margin_right = 90.0
-margin_bottom = 127.0
+margin_bottom = 157.0
 text = "reload"
 
 [node name="ButtonTestServer" type="Button" parent="Cols/Side/Rows"]
-margin_top = 147.0
+margin_top = 177.0
 margin_right = 90.0
-margin_bottom = 176.0
+margin_bottom = 206.0
 text = "test server"
 
 [node name="Main" type="ScrollContainer" parent="Cols"]

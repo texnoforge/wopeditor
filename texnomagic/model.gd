@@ -30,3 +30,4 @@ func load():
 	data = jr.result
 	params = data.get('params', [])
 	n_gauss = data.get('n_gauss', 10)
+	return true

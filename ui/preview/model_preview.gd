@@ -28,18 +28,21 @@ func show_label(value):
 
 
 func _draw():
-	if not symbol or not symbol.model:
-		return show_label("[no model]")
-	if not symbol.model.preview:
-		return show_label("[model preview not available]")
-	var type = symbol.model.preview.get('type')
-	if type != 'gmm':
-		return show_label("[unknown preview type: %s]" % type)
-	var comps = symbol.model.preview.get('components')
-	if not comps:
-		return show_label("[preview has no components (?!)]")
-
+	var comps = []
 	label.visible = false
+	if not symbol or not symbol.model:
+		show_label("[no model]")
+	elif not symbol.model.preview:
+		show_label("[model preview not available]")
+	else:
+		var type = symbol.model.preview.get('type')
+		if type != 'gmm':
+			show_label("[unknown preview type: %s]" % type)
+		else:
+			comps = symbol.model.preview.get('components')
+			if not comps:
+				show_label("[preview has no components (?!)]")
+				comps = []
 
 	# draw all drawings
 	for drawing in symbol.drawings:

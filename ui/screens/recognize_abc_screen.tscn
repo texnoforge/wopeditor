@@ -1,0 +1,134 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://ui/shared/header.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ui/screens/recognize_abc_screen.gd" type="Script" id=2]
+[ext_resource path="res://ui/draw/draw_area.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/shared/hsep.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/theme/texno_theme.tres" type="Theme" id=5]
+[ext_resource path="res://ui/button/symbol_score.tscn" type="PackedScene" id=6]
+[ext_resource path="res://fonts/FontH2.tres" type="DynamicFont" id=8]
+
+[node name="Screen" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 5 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Header" parent="." instance=ExtResource( 1 )]
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 0.0
+margin_right = 1280.0
+margin_bottom = 85.0
+custom_constants/margin_right = 20
+text = "Recognize Abc"
+
+[node name="Cols" type="HBoxContainer" parent="."]
+margin_top = 89.0
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Side" type="MarginContainer" parent="Cols"]
+margin_right = 260.0
+margin_bottom = 631.0
+rect_min_size = Vector2( 150, 0 )
+custom_constants/margin_right = 30
+custom_constants/margin_left = 30
+
+[node name="Rows" type="VBoxContainer" parent="Cols/Side"]
+margin_left = 30.0
+margin_right = 230.0
+margin_bottom = 631.0
+custom_constants/separation = 20
+
+[node name="ButtonRecognize" type="Button" parent="Cols/Side/Rows"]
+margin_right = 200.0
+margin_bottom = 29.0
+text = "recognize"
+
+[node name="HSep" parent="Cols/Side/Rows" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 49.0
+margin_right = 200.0
+margin_bottom = 59.0
+
+[node name="ButtonUndo" type="Button" parent="Cols/Side/Rows"]
+margin_top = 79.0
+margin_right = 200.0
+margin_bottom = 108.0
+text = "undo"
+
+[node name="ButtonClear" type="Button" parent="Cols/Side/Rows"]
+margin_top = 128.0
+margin_right = 200.0
+margin_bottom = 157.0
+text = "clear"
+
+[node name="HSep2" parent="Cols/Side/Rows" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 177.0
+margin_right = 200.0
+margin_bottom = 187.0
+
+[node name="ScoresLabel" type="Label" parent="Cols/Side/Rows"]
+margin_top = 207.0
+margin_right = 200.0
+margin_bottom = 241.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 8 )
+text = "Best Matches:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoresScroll" type="ScrollContainer" parent="Cols/Side/Rows"]
+margin_top = 261.0
+margin_right = 200.0
+margin_bottom = 631.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="Scores" type="VBoxContainer" parent="Cols/Side/Rows/ScoresScroll"]
+margin_right = 200.0
+margin_bottom = 370.0
+size_flags_vertical = 11
+custom_constants/separation = 20
+
+[node name="SymbolScore" parent="Cols/Side/Rows/ScoresScroll/Scores" instance=ExtResource( 6 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 200.0
+margin_bottom = 200.0
+
+[node name="Main" type="MarginContainer" parent="Cols"]
+margin_left = 264.0
+margin_right = 1280.0
+margin_bottom = 631.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DrawArea" parent="Cols/Main" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1016.0
+margin_bottom = 631.0
+
+[connection signal="pressed" from="Cols/Side/Rows/ButtonRecognize" to="." method="_on_ButtonRecognize_pressed"]
+[connection signal="pressed" from="Cols/Side/Rows/ButtonUndo" to="Cols/Main/DrawArea" method="undo" flags=3]
+[connection signal="pressed" from="Cols/Side/Rows/ButtonClear" to="." method="_on_ButtonClear_pressed"]

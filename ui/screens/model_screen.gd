@@ -26,7 +26,7 @@ func set_context(new_symbol):
 func update_screen():
 	get_nodes()
 	preview.set_context(symbol)
-	n_gauss_box.value = symbol.model.n_gauss
+	n_gauss_box.value = symbol.model.n_gauss if symbol.model else 10
 	train_button.disabled = false
 
 

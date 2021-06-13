@@ -69,7 +69,9 @@ func get_screen_title():
 	if not screen_name or screen_name == 'abcs':
 		return 'Words of Power Editor'
 	var title = abc.name
-	if screen_name == 'abc':
+	if screen_name == 'recognize_abc':
+		return title + ' > Recognize Symbols'
+	if screen_name == 'abc' or not symbol:
 		return title
 	title += ' > %s (%s)' % [symbol.name, symbol.meaning]
 	if screen_name == 'symbol':
@@ -138,6 +140,7 @@ func new_abc(_abc):
 	abcs.save_new_alphabet(_abc)
 	print("NEW alphabet: %s @ %s" % [_abc.name, _abc.path])
 	call_deferred('_goto_screen', 'abc', _abc)
+	reload_server()
 
 
 func new_symbol(_symbol, batch = false):
@@ -148,6 +151,7 @@ func new_symbol(_symbol, batch = false):
 		screen.call_deferred('show_new_symbol_dialog')
 	else:
 		call_deferred('_goto_screen', 'symbol', _symbol)
+	reload_server()
 
 
 func new_drawing(_drawing, batch = false):
@@ -167,10 +171,15 @@ func new_drawing(_drawing, batch = false):
 func delete_drawing(_drawing):
 	_drawing.delete()
 	symbol.load_drawings()
+	reload_server()
 	go_back()
 
 
 func update_model_preview(_symbol):
+	if not _symbol.model:
+		# don't bother TexnoMagic server to generate empty preview
+		return
+
 	client.send_request('model_preview', {
 			'abc': abc.name,
 			'symbol': _symbol.name,
@@ -185,6 +194,28 @@ func train_model(_symbol, n_gauss=0):
 	if n_gauss > 0:
 		params['n_gauss'] = n_gauss
 	client.send_request('train_symbol', params)
+
+
+func recognize(_abc, curves):
+	var params = {
+		'abc': _abc.name,
+		'curves': curves,
+	}
+	client.send_request('recognize', params)
+
+
+func recognize_top(_abc, curves, n=0):
+	var params = {
+		'abc': _abc.name,
+		'curves': curves,
+		'n': n,
+	}
+	client.send_request('recognize_top', params)
+
+
+func reload_server():
+	print("RELOAD TexnoMagic server alphabets...")
+	client.send_request('reload')
 
 
 func test_server():
@@ -211,11 +242,19 @@ func request_response(resp, req):
 		symbol.model.preview = p
 		if screen_name == 'model':
 			screen.update_screen()
+	elif _method == 'recognize_top':
+		var scores = resp['result']
+		print("RECOGNITION RESULTS: %s symbols" % [len(scores)])
+		var scr = get_screen('recognize_abc')
+		scr.set_scores(scores)
+		if screen_name == 'recognize_abc':
+			scr.update_screen()
 	elif _method == 'train_symbol':
 		print("MODEL TRAINED: %s" % req['params']['symbol'])
 		symbol.load_model()
 		if screen_name == 'model':
 			screen.set_context(symbol)
+		reload_server()
 	elif _method == 'export_abc':
 		var abc_path = resp['result']
 		print("EXPORTED alphabet: %s" % abc_path)
@@ -225,6 +264,8 @@ func request_response(resp, req):
 		call_deferred('_reload_abcs')
 	elif _method == 'version':
 		print("TexnoMagic server %s online \\o/" % resp['result'])
+	elif _method == 'reload':
+		print("RELOADED TexnoMagic server")
 	else:
 		print("UNHANDLED response for %s: %s" % [_method, resp])
 
