@@ -43,9 +43,11 @@ func _ready():
 	get_online_mods()
 	goto_screen('abcs', {'abcs': abcs, 'mods': mods})
 
+
 func get_online_mods():
 	print("QUERY online mods @ wop.mod.io")
 	http.request(common.MODIO_MODS_URL_GET)
+
 
 func _notification(what):
 	if what == NOTIFICATION_PREDELETE:
@@ -253,3 +255,7 @@ func get_mod(_mod):
 		if but:
 			but.disabled = true
 	client.send_request('download_mod', [_mod.mod_name_id])
+
+
+func get_server_status():
+	return client.get_server_status()

@@ -41,6 +41,7 @@ func _process(delta):
 				var req = queue.pop_front()
 				_send_request(req)
 			else:
+				print("CLIENT has no work - sleeping")
 				set_process(false)
 		return
 
@@ -182,6 +183,17 @@ func disconnect_from_server():
 	print("DISONNECTING from TexnoMagic server %s:%s ..." % [host, port])
 	client.disconnect_from_host()
 	set_process(false)
+
+
+func get_server_status():
+	var status = client.get_status()
+	if status == StreamPeerTCP.STATUS_CONNECTED:
+		return 'OK'
+	if error or status == StreamPeerTCP.STATUS_ERROR:
+		return 'ERROR'
+	if status == StreamPeerTCP.STATUS_NONE:
+		return 'NOT CONNECTED'
+	return '?'
 
 
 func int2bytes(integer: int):
