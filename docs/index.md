@@ -11,18 +11,19 @@ Learn more in **[Intro](intro.md)**.
 
 ## Status
 
-### wopeditor is being rewriten in [Godot] ¯\\\_(ツ)\_/¯
+### entered alpha starting with v0.5.0 ✨
 
-This is a 3rd iteration of wopeditor UI after previous versions in Unreal Engine and Kivy.
-I like Godot a lot so far, this might be the final implementation.
+Latest and greatest Godot-based `wopeditor` has reached feature parity with the
+previous [python-wopeditor] and I'm finally happy with the underlying tech ᕕ( ᐛ )ᕗ
 
-You can use previous [python-wopeditor] until this new Godot version
-reaches feature parity.
+**Now is a great time to join the first wizards** 🧙🏻‍♂️
 
 
 ## Installation
 
 Please see **[Installation](install.md)**.
+
+<iframe frameborder="0" src="https://itch.io/embed/1088137?bg_color=000000&amp;fg_color=ffffff&amp;link_color=83b6f2&amp;border_color=333333" width="552" height="167"><a href="https://texnoforge.itch.io/wopeditor">Words of Power Editor by texnoforge</a></iframe>
 
 
 ## Bugs and Feature Requests

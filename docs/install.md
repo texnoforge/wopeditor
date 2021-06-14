@@ -1,12 +1,10 @@
 # Installation
 
-## Soon™: binaries on itch.io
+## Download from [itch.io][itch]
 
-As soon as `wopeditor` reaches feature parity with `python-wopeditor`, I'll
-start providing binaries through [itch.io](https://itch.io) as a primary means
-of distribution.
+<iframe frameborder="0" src="https://itch.io/embed/1088137?bg_color=000000&amp;fg_color=ffffff&amp;link_color=83b6f2&amp;border_color=333333" width="552" height="167"><a href="https://texnoforge.itch.io/wopeditor">Words of Power Editor by texnoforge</a></iframe>
 
-Until that happens you need to... **Use The Source!**
+If your platform is missing from [itch.io][itch], you need to... **Use The Source!**
 
 
 ## Use the Source
@@ -100,3 +98,4 @@ Have a nice magic!
 [TexnoMagic]: https://texnoforge.github.io/texnomagic/
 [Get Python]: https://www.python.org/downloads/
 [wopeditor-gh]: https://github.com/texnoforge/wopeditor
+[itch]: https://texnoforge.itch.io/wopeditor
