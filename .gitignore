@@ -2,7 +2,7 @@
 export.cfg
 *.translation
 /site
-/dist/wopeditor
+/dist/wopeditor*
 /dist/html
 /addons
 /tests/results.xml
