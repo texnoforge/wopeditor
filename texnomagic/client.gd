@@ -7,11 +7,15 @@ var common = Common.new()
 
 var host = '127.0.0.1'
 var port = 6969
-var timeout = 0.2
+var timeout = 0.3
+var cooldown = 1.0
+var retries := 3
 
 var client = StreamPeerTCP.new()
 var jsonrpc = JSONRPC.new()
-var t = 0.0
+var status = StreamPeerTCP.STATUS_NONE
+var t_conn = 0.0
+var t_retry = 0.0
 var last_id := 0
 
 var error = false
@@ -32,7 +36,8 @@ func _notification(what):
 
 
 func _process(delta):
-	var status = client.get_status()
+	status = client.get_status()
+
 	if status == StreamPeerTCP.STATUS_CONNECTED:
 		if request:
 			_process_response()
@@ -44,15 +49,28 @@ func _process(delta):
 				set_process(false)
 		return
 
-	if error or status == StreamPeerTCP.STATUS_ERROR:
-		_server_fail("ERROR connecting to TexnoMagic server :(")
+	if error:
+		if retries > 0:
+			t_retry += delta
+			if t_retry >= cooldown:
+				retries -= 1
+				t_retry = 0
+				print("RETRY connection to TexnoMagic server...")
+				connect_to_server()
+		else:
+			_server_fail("NO CONNECTION to TexnoMagic server :'(")
+			set_process(false)
+		return
+
+	if status == StreamPeerTCP.STATUS_ERROR:
+		_server_fail("ERROR connecting to TexnoMagic server :-o")
 	elif status == StreamPeerTCP.STATUS_CONNECTING:  # is connecting
-		t += delta
-		if t >= timeout:
+		t_conn += delta
+		if t_conn >= timeout:
 			error = true
-			_server_fail("TIMEOUT - TexnoMagic server not available :-/")
+			_server_fail("TIMEOUT connecting to TexnoMagic server :-/")
 	elif status == StreamPeerTCP.STATUS_NONE:
-		_server_fail("LOST connection to TexnoMagic server (%s)" % status)
+		_server_fail("LOST CONNECTION to TexnoMagic server (%s)" % status)
 
 
 func _process_response():
@@ -87,7 +105,7 @@ func queue_request(req):
 func send_request(_method, _params=[]):
 	last_id += 1
 	var req = jsonrpc.make_request(_method, _params, last_id)
-	var status = client.get_status()
+	status = client.get_status()
 
 	if status == StreamPeerTCP.STATUS_CONNECTED:
 		if not request:
@@ -99,7 +117,7 @@ func send_request(_method, _params=[]):
 		return OK
 	if error or status == StreamPeerTCP.STATUS_ERROR:
 		queue_request(req)  # queue to report error
-		_server_fail("ERROR: TexnoMagic server not available :(")
+		_server_fail("ERROR: TexnoMagic server not available :'(")
 		return FAILED
 	if status == StreamPeerTCP.STATUS_NONE:
 		# auto (re)connect
@@ -164,11 +182,11 @@ func _server_fail(msg):
 		_response_error(-32000, msg)
 		request = queue.pop_front()
 	error = true
-	set_process(false)
 
 
 func connect_to_server():
-	t = 0
+	t_conn = 0.0
+	t_retry = 0.0
 	error = false
 	var r = client.connect_to_host(host, port)
 	if r != OK:
@@ -185,13 +203,12 @@ func disconnect_from_server():
 
 
 func get_server_status():
-	var status = client.get_status()
 	if status == StreamPeerTCP.STATUS_CONNECTED:
 		return 'OK'
 	if error or status == StreamPeerTCP.STATUS_ERROR:
 		return 'ERROR'
-	if status == StreamPeerTCP.STATUS_NONE:
-		return 'NOT CONNECTED'
+	if status == StreamPeerTCP.STATUS_CONNECTING:
+		return '...'
 	return '?'
 
 

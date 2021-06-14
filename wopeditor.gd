@@ -32,7 +32,6 @@ func _ready():
 	abcs.load()
 	# start TexnoMagic server and connect to it
 	server.ensure_server()
-	client.connect_to_server()
 	add_child(client)
 	var r = client.connect("response", self, "request_response")
 	assert(r == OK)
