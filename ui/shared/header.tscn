@@ -80,6 +80,5 @@ custom_colors/font_color = Color( 1, 1, 0, 1 )
 text = "?"
 
 [node name="StatusTimer" type="Timer" parent="."]
-autostart = true
 
 [connection signal="timeout" from="StatusTimer" to="." method="_on_StatusTimer_timeout"]

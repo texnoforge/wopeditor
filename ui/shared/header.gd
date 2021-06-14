@@ -10,6 +10,7 @@ func _ready():
 	update_title()
 	update_back_button()
 	update_status()
+	$StatusTimer.start()
 
 
 func update_title():
