@@ -1,7 +1,7 @@
 extends Node
 
 # wopeditor version
-const version = '0.5.0'
+const version = '0.5.1'
 
 var Abcs = preload("res://texnomagic/abcs.gd")
 var Client = preload("res://texnomagic/client.gd")
