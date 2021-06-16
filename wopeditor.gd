@@ -13,6 +13,7 @@ var client = Client.new()
 var common = Common.new()
 var server = Server.new()
 var http = HTTPRequest.new()
+var status_timer = Timer.new()
 
 var screens = {}
 var past_screens = []
@@ -41,6 +42,10 @@ func _ready():
 	assert(r == OK)
 	get_online_mods()
 	goto_screen('abcs', {'abcs': abcs, 'mods': mods})
+	status_timer.wait_time = 1.0
+	status_timer.connect("timeout", self, "status_update")
+	add_child(status_timer)
+	status_timer.start()
 
 
 func get_online_mods():
@@ -298,5 +303,9 @@ func get_mod(_mod):
 	client.send_request('download_mod', [_mod.mod_name_id])
 
 
-func get_server_status():
-	return client.get_server_status()
+func status_update():
+	var header = screen.get_node("Header")
+	if not header:
+		return
+	var st = client.get_server_status()
+	header.status = st

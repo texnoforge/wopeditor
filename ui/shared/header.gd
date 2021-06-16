@@ -4,13 +4,13 @@ extends MarginContainer
 
 export var show_back = true setget set_show_back
 export var text = 'Words of Power Editor' setget set_text
+export var status = '?' setget set_status
 
 
 func _ready():
+	status = '?'
 	update_title()
 	update_back_button()
-	update_status()
-	$StatusTimer.start()
 
 
 func update_title():
@@ -31,17 +31,15 @@ func set_show_back(new_show):
 	update_back_button()
 
 
-func update_status():
+func set_status(new_status):
+	status = new_status
 	var st = $Title/MarginRight/HBox/ServerStatus
-	var status = WoPEditor.get_server_status()
-	var color = Color.yellow
+	var color : Color
 	if status == "OK":
 		color = Color.green
 	elif status == "ERROR":
 		color = Color.red
+	else:
+		color = Color.yellow
 	st.text = status
 	st.set("custom_colors/font_color", color)
-
-
-func _on_StatusTimer_timeout():
-	update_status()
