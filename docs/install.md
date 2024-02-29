@@ -24,9 +24,11 @@ using precompiled binaries has several advanages:
 platforms supported byt the Godot Engine and Python modules used by [TexnoMagic].
 
 
-### Requirement: Godot Engine
+### Requirement: Godot 3
 
-At minimum, you need to get the marvelous **[Godot Engine](https://godotengine.org/download)**.
+At minimum, you need to get the marvelous **[Godot Engine 3.x](https://godotengine.org/download)**.
+
+Godot 4 isn't supported, you need latest 3.
 
 
 ### Requirement: TexnoMagic

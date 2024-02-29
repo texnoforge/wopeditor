@@ -27,13 +27,13 @@ Please see [TexnoMagic] library which provides technical implementation.
 * draw symbols using mouse (or other pointing/touch device) and save to files
 * train symbol models which can be used to recognize user drawn symbols
 * visual previews of symbol models
-* TODO: test real-time symbol recognition
+* test real-time symbol recognition
 * browse and preview symbols loaded from disk
 * easily open relevant files in file manager
 
 ### mods / community
 
-* WiP: show and download mods from [wop.mod.io]
+* show and download mods from [wop.mod.io]
 * export symbols/alphabets to zip files/[wop.mod.io]
 
 ### code
